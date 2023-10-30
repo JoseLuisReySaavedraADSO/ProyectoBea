@@ -50,9 +50,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'id_rol_fk' => ['required', 'integer'],
+            'nombre' => ['nullable', 'string', 'max:250'],
+            'telefono' => ['nullable', 'string', 'max:10'],
+            'num_doc' => ['required', 'string', 'max:10'],
+            'tipo_doc' => ['required', 'string', 'max:250'],
+            'correo_inst' => ['required', 'string', 'email', 'max:250', 'unique:users'],
+            'correo_alt' => ['nullable', 'string', 'email', 'max:250'],
+            'regional' => ['required', 'string', 'max:250'],
+            'fecha_nac' => ['required', 'date'],
+            'centro_form' => ['required', 'string', 'max:250'],
+            'password' => ['required', 'string', 'min:3', 'confirmed'],
         ]);
     }
 
@@ -64,10 +72,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+        $user = User::create([
+            // 'id_rol_fk' => $data['id_rol_fk'],
+            'nombre' => $data['nombre'],
+            'telefono' => $data['telefono'],
+            'num_doc' => $data['num_doc'],
+            'tipo_doc' => $data['tipo_doc'],
+            'correo_inst' => $data['correo_inst'],
+            'correo_alt' => $data['correo_alt'],
+            'regional' => $data['regional'],
+            'fecha_nac' => $data['fecha_nac'],
+            'centro_form' => $data['centro_form'],
             'password' => Hash::make($data['password']),
         ]);
+
+        dd($user);
     }
 }
