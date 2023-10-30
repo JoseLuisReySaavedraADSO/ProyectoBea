@@ -49,18 +49,34 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'regional.required' => 'Este campo es obligatorio.',
+            'telefono.required' => 'Este campo es obligatorio.',
+            'telefono.numeric' => 'Este campo debe ser numérico.',
+            'telefono.digits' => 'El campo teléfono debe tener exactamente 10 dígitos.',
+            'num_doc.required' => 'Este campo es obligatorio.',
+            'num_doc.numeric' => 'Este campo debe ser numérico.',
+            'num_doc.digits_between' => 'El campo número de documento debe tener entre 6 y 10 dígitos.',
+            'num_doc.unique' => 'Ya tienes asociado este documento con otro usuario.',
+            'tipo_doc.required' => 'Este campo es obligatorio.',
+            'correo_inst.required' => 'Este campo es obligatorio.',
+            'correo_alt.required' => 'Este campo es obligatorio.',
+            'regional.required' => 'Este campo es obligatorio.',
+            'fecha_nac.required' => 'Este campo es obligatorio.',
+            'centro_form.required' => 'Este campo es obligatorio.',
+        ];
+
         return Validator::make($data, [
             'nombre' => ['nullable', 'string', 'max:250'],
-            'telefono' => ['nullable', 'string', 'max:10'],
-            'num_doc' => ['required', 'string', 'max:10', 'unique:users'],
+            'telefono' => ['required', 'numeric', 'digits:10'],
+            'num_doc' => ['required', 'numeric', 'digits_between:6,10', 'unique:users'],
             'tipo_doc' => ['required', 'string', 'max:250'],
             'correo_inst' => ['required', 'string', 'email', 'max:250', 'unique:users'],
-            'correo_alt' => ['nullable', 'string', 'email', 'max:250'],
+            'correo_alt' => ['required', 'string', 'email', 'max:250'],
             'regional' => ['required', 'string', 'max:250'],
             'fecha_nac' => ['required', 'date'],
             'centro_form' => ['required', 'string', 'max:250'],
-            // 'password' => ['required', 'string', 'min:3', 'confirmed'],
-        ]);
+        ], $messages);
     }
 
     /**
@@ -89,3 +105,4 @@ class RegisterController extends Controller
         ]);
     }
 }
+
