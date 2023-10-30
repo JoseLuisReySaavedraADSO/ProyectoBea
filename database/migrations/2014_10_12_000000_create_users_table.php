@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_rol_fk')->default(1);
             $table->string('nombre', 250)->nullable();
             $table->string('telefono', 250)->nullable();
-            $table->string('num_doc', 250);
+            $table->string('num_doc', 250)->unique();
             $table->string('tipo_doc', 250);
             $table->string('correo_inst', 250)->unique();
             $table->string('correo_alt', 250);
