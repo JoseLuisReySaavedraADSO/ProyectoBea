@@ -15,4 +15,9 @@ class Practica extends Model
         'created_at',	
         'updated_at',
     ];
+
+    public function temasTeoriaPractica()
+    {
+        return $this->belongsTo(TemaTeoriaPractica::class, 'id_practica_fk', 'id');
+    }
 }

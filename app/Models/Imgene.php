@@ -15,4 +15,9 @@ class Imgene extends Model
         'created_at',	
         'updated_at',  
     ];
+
+    public function temasTeoriaPractica()
+    {
+        return $this->belongsTo(TemaTeoriaPractica::class, 'id_img_fk', 'id');
+    }
 }

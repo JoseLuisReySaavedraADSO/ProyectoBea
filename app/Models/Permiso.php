@@ -16,4 +16,9 @@ class Permiso extends Model
         'created_at',	
         'updated_at',
     ];
+
+    public function roles()
+    {
+        return $this->hasMany(Rol::class, 'id_permiso_fk', 'id');
+    }
 }

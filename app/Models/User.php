@@ -55,4 +55,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function perfil()
+    {
+        return $this->hasOne(Perfil::class, 'id_usuario_fk', 'id');
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'id_rol_fk', 'id');
+    }
+
+    public function usuariosSecciones()
+    {
+        return $this->hasMany(UsuarioSeccion::class, 'id_usuario_fk', 'id');
+    }
 }

@@ -16,4 +16,9 @@ class Role extends Model
         'created_at',	
         'updated_at',	
     ];
+
+    public function permiso()
+    {
+        return $this->belongsTo(Permiso::class, 'id_permiso_fk', 'id');
+    }
 }

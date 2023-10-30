@@ -16,4 +16,14 @@ class Seccione extends Model
         'created_at',	
         'updated_at',
     ];
+    
+    public function tema()
+    {
+        return $this->belongsTo(Tema::class, 'id_tema_fk', 'id');
+    }
+
+    public function usuariosSecciones()
+    {
+        return $this->hasMany(UsuarioSeccion::class, 'id_seccion_fk', 'id');
+    }
 }
