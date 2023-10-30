@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'regional' => ['required', 'string', 'max:250'],
             'fecha_nac' => ['required', 'date'],
             'centro_form' => ['required', 'string', 'max:250'],
-            'password' => ['required', 'string', 'min:3', 'confirmed'],
+            // 'password' => ['required', 'string', 'min:3', 'confirmed'],
         ]);
     }
 
@@ -72,6 +72,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $data['id_rol_fk'] = 2;
+        $data['password'] = $data['num_doc'];
         
         return User::create([
             'id_rol_fk' => $data['id_rol_fk'],
