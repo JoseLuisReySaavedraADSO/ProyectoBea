@@ -6,6 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
+                <!-- <i class='bx bx-log-out-circle' style='color:#bf8f8f; font-size: 200px' ></i> -->
 
                 <div class="card-body">
                     @if (session('status'))
