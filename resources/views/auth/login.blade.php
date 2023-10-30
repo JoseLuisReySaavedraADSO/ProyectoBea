@@ -1,21 +1,61 @@
-@extends('layouts.app')
+<title>Bea | Login</title>
+@extends('layouts.out')
 
 @section('content')
+
 <div class="container">
+    <div class="logo">
+        <img src="{{ asset('/img/boceto logo 2.png') }}" alt="Logo Bea">
+    </div>
+    <div class="options">
+            <div class="login-form">
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="form-group">
+                    <label for="correo_inst" class="left-label">{{ __('Correo Institucional') }}</label>
+                    <input type="email" name="correo_inst" placeholder="Correo" style="background-color: #D9D9D9;">
+                    @error('email')
+                        <span class="form__alert" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="password" class="left-label">{{ __('Contraseña') }}</label>
+                    <input type="password" name="password" placeholder="Contraseña" style="background-color: #D9D9D9;">
+                    @error('email')
+                        <span class="form__alert" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group buttons">
+                    <button type="button" onclick="history.back()">Atrás</button>
+                    <button type="submit">{{ __('Iniciar') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="container">
+    <div class="logo">
+        <img src="{{ asset('/img/boceto logo 2.png') }}" alt="Logo Bea">
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
+                <div class="login-form">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="row mb-3">
-                           <label for="correo_inst" class="col-md-4 col-form-label text-md-end">{{ __('Correo Institucional') }}</label>
+                        <div>
+                           <label for="correo_inst">{{ __('Correo Institucional') }}</label>
 
-                            <div class="col-md-6">
-                                   <input id="correo_inst" type="text" class="form-control @error('correo_inst') is-invalid @enderror" name="correo_inst" value="{{ old('correo_inst') }}" required autocomplete="correo_inst" autofocus>
+                            <div>
+                                   <input id="correo_inst" type="text" class="form-group form-control @error('correo_inst') is-invalid @enderror" name="correo_inst" value="{{ old('correo_inst') }}" required autocomplete="correo_inst" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -24,13 +64,13 @@
                                 @enderror
                             </div>
                         </div>
-                        
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                        <div>
+                            <label for="password">{{ __('Contraseña') }}</label>
+
+                            <div>
+                                <input id="password" type="password" class="form-group form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -70,5 +110,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

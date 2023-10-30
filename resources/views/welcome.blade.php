@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Bea | Welcome</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,12 +23,12 @@
             </div>
             <div class="options">
                 @auth
-                    <div class="option">
+                    <div class="option options">
                         <a href="{{ url('/home') }}">
                             <div class="icon">
                                 <i class='bx bx-user' style='color:#00b400'></i>
                             </div>
-                            Home
+                            HOME
                         </a>
                     </div>
                 @else
