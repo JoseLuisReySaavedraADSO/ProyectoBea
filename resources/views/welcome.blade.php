@@ -17,43 +17,43 @@
     <body>
 
     @if (Route::has('login'))
-        <div class="container">
-            <div class="logo">
-                <img src="{{ asset('/img/boceto logo 2.png') }}" alt="Logo Bea">
+        <main class="welcomeContainer">
+            <div class="welcomeContainer__logo">
+                <img class="welcomeContainer__logo--img" src="{{ asset('/img/boceto logo 2.png') }}" alt="Logo Bea">
             </div>
-            <div class="options">
+            <div class="welcomeContainer__options">
                 @auth
-                    <div class="option options">
+                    <div class="options">
                         <a href="{{ url('/home') }}">
-                            <div class="icon">
-                                <i class='bx bx-user' style='color:#00b400'></i>
+                            <div class="options__icon">
+                                <i class='bx bx-user'></i>
                             </div>
                             HOME
                         </a>
                     </div>
                 @else
-                    <div class="option">
+                    <div class="options">
                         <a href="{{ route('login') }}">
-                            <div class="icon">
-                                <i class='bx bx-log-in' style='color:#00b400'></i>
-                            </div>
                             INGRESA
+                            <div class="options__icon">
+                                <i class='bx bxs-log-in'></i>
+                            </div>
                         </a>
                     </div>
                     @if (Route::has('register'))
-                        <div class="option">
+                        <div class="options">
                             <a href="{{ route('register') }}">
-                                <div class="icon">
-                                    <i class='bx bxs-plus-square' style='color:#00b400'></i>
-                                </div>
                                 REGISTRATE
+                                <div class="options__icon">
+                                    <i class='bx bxs-plus-square'></i>
+                                </div>
                             </a>
                         </div>
                     @endif
                 @endauth
             </div>
-            <img src="{{ asset('/img/logoSena 1.png') }}" alt="Logo sena" class="bottom-logo">
-        </div>
+            <img src="{{ asset('/img/logoSena 1.png') }}" alt="Logo sena" class="welcomeContainer__sena">
+        </main>
     @endif
     
     </body>
