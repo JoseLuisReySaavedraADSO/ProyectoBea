@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -57,7 +58,7 @@ class RegisterController extends Controller
             'num_doc.required' => 'Este campo es obligatorio.',
             'num_doc.numeric' => 'Este campo debe ser numérico.',
             'num_doc.digits_between' => 'El campo número de documento debe tener entre 6 y 10 dígitos.',
-            'num_doc.unique' => 'Ya tienes asociado este documento con otro usuario.',
+            'num_doc.validation.unique' => 'Ya tienes asociado este documento con otro usuario.',
             'tipo_doc.required' => 'Este campo es obligatorio.',
             'correo_inst.required' => 'Este campo es obligatorio.',
             'correo_alt.required' => 'Este campo es obligatorio.',
@@ -89,7 +90,8 @@ class RegisterController extends Controller
     {
         $data['id_rol_fk'] = 2;
         $data['password'] = $data['num_doc'];
-        
+        $token = Str::random(10);
+
         return User::create([
             'id_rol_fk' => $data['id_rol_fk'],
             'nombre' => $data['nombre'],
@@ -102,6 +104,7 @@ class RegisterController extends Controller
             'fecha_nac' => $data['fecha_nac'],
             'centro_form' => $data['centro_form'],
             'password' => Hash::make($data['password']),
+            'remember_token' => $token,
         ]);
     }
 }
