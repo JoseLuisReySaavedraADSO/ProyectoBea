@@ -14,6 +14,9 @@
 
     </head>
 
+    @extends('layouts.app')
+    @section('content')
+
     <body>
 
     @if (Route::has('login'))
@@ -55,6 +58,6 @@
             <img src="{{ asset('/img/logoSena 1.png') }}" alt="Logo sena" class="welcomeContainer__sena welcomeContainer__sena--white">
         </main>
     @endif
-    
+    @endsection
     </body>
 </html>

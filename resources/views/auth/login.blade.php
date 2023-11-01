@@ -31,10 +31,18 @@
                     </span>
                 @enderror
             </div>
+
+            <!-- @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('¿Olvidaste tu contraseña?') }}
+                </a>
+            @endif -->
+
             <div class="form__button">
                 <button class="button" type="button" onclick="history.back()">Atrás</button>
                 <button class="button" type="submit">{{ __('Iniciar') }}</button>
             </div>
+            
         </form>
     </div>
     
