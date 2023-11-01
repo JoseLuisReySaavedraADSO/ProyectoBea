@@ -52,7 +52,7 @@
                     @endif
                 @endauth
             </div>
-            <img src="{{ asset('/img/logoSena 1.png') }}" alt="Logo sena" class="welcomeContainer__sena">
+            <img src="{{ asset('/img/logoSena 1.png') }}" alt="Logo sena" class="welcomeContainer__sena welcomeContainer__sena--white">
         </main>
     @endif
     

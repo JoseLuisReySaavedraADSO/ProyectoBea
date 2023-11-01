@@ -5,7 +5,6 @@
     font-family: 'Jockey One', sans-serif;
 }
 
-
 /* 
     VARIABLES
 */
@@ -104,10 +103,7 @@
     max-width: 280px;
 }
 .form__item{
-    margin: 12px 0px;
-}
-.form__item span{
-    color: red;
+    margin: 12px auto;
 }
 .item__label{
     padding: 0px 0px 0px 15px;
@@ -135,6 +131,7 @@
     justify-content: space-evenly;
 }
 .button{
+    cursor: pointer;
     text-transform: uppercase;
     color: var(--colorPrincipal);
     border: 2px solid var(--colorPrincipal);
@@ -160,4 +157,145 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.registerContainer__logo{
+    display: none;
+}
+.registerContainer__form{
+    padding: 0px 20px;
+}
+.registerContainer .welcomeContainer__sena{
+    display: none;
+}
+
+
+
+
+
+/* 
+    DESKTOP
+*/
+@media screen and (min-width: 1024px){
+
+    /* 
+        VISTA WELCOME
+    */
+    .welcomeContainer{
+        margin-top: 0px;
+        max-width: 100%;
+        flex-direction: row;
+        /* justify-content: space-between; */
+        gap: 0;
+    }
+    .welcomeContainer__logo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 65%;
+        min-height: 100vh;
+        background-color: var(--colorPrincipal);
+    }
+    .welcomeContainer__logo--img{
+        max-width: 320px;
+        filter: brightness(0) invert(1);
+        -webkit-filter: brightness(0) invert(1);
+    }
+    .welcomeContainer__options{
+        max-width: 35%;
+        justify-content: center;
+        gap: 50px;
+    }
+    .welcomeContainer__sena{
+        top: 10px;
+        left: 10px;
+    }
+    .welcomeContainer__sena--white{
+        filter: brightness(0) invert(1);
+        -webkit-filter: brightness(0) invert(1);
+    }
+
+    /* 
+        VISTA LOGIN
+    */
+    .loginContainer{
+        margin-top: 0px;
+        max-width: 100%;
+        flex-direction: row;
+        /* justify-content: space-between; */
+        gap: 0;
+    }
+    .loginContainer__logo{
+        display: flex;
+        order: 1;
+        align-items: center;
+        justify-content: center;
+        max-width: 35%;
+        min-height: 100vh;
+        background-color: var(--colorPrincipal);
+    }
+    .loginContainer__logo--img{
+        max-width: 320px;
+        filter: brightness(0) invert(1);
+        -webkit-filter: brightness(0) invert(1);
+    }
+    .loginContainer__form{
+        max-width: 65%;
+    }
+    .form{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .form__item{
+        width: 310px;
+    }
+    .item__input{
+        padding: 12px;
+    }
+
+
+    /* 
+        VISTA REGISTER
+    */
+    .registerContainer{
+        margin: 0px;
+        max-width: 100%;
+        flex-direction: row;
+        /* justify-content: space-between; */
+        gap: 0;
+    }
+    .registerContainer__logo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35%;
+        min-height: 100vh;
+        background-color: var(--colorPrincipal);
+    }
+    .registerContainer__logo--img{
+        max-width: 320px;
+        filter: brightness(0) invert(1);
+        -webkit-filter: brightness(0) invert(1);
+    }
+    .registerContainer__form{
+        padding: 0px 0px;
+        width: 65%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .form__item{
+        display: inline-block;
+        margin: 12px 8px;
+    }
+    .form__button{
+        width: 100%;
+        max-width: 400px;
+    }
+    .registerContainer .welcomeContainer__sena{
+        display: block;
+    }
+    
+
 }
