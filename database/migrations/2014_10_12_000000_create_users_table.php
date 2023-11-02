@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('regional', 250);
             $table->date('fecha_nac');
             $table->string('centro_form', 250);
-            $table->timestamp('email_verified_at');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
