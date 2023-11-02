@@ -18,5 +18,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// SECTIONS
+
+Route::get('/secciones', [App\Http\Controllers\SeccionesController::class, 'index'])->name('secciones');

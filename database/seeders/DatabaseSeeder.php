@@ -1,10 +1,11 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\Permiso;
 use App\Models\Role;
-
-
+use App\Models\Seccione;
+use App\Models\Tema;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,24 +20,45 @@ class DatabaseSeeder extends Seeder
         $fechaNacimiento = '2004-04-24'; // Formatea la fecha en el formato correcto
 
         Permiso::create([
-            'nom_perm' => 'Editar',   
+            'nom_perm' => 'Editar',
             'desc_perm' => 'El usuario puede editar',
         ]);
 
         Permiso::create([
-            'nom_perm' => 'Visualizar',   
+            'nom_perm' => 'Visualizar',
             'desc_perm' => 'El usuario puede visualizar',
         ]);
 
         Role::create([
-            'nom_rol' => 'Administrador',   
+            'nom_rol' => 'Administrador',
             'id_permiso_fk' => '1',
         ]);
 
         Role::create([
-            'nom_rol' => 'Aprendiz',    
+            'nom_rol' => 'Aprendiz',
             'id_permiso_fk' => '2',
         ]);
+
+        // Insertar 20 registros de Tema y Seccione
+        for ($i = 1; $i <= 20; $i++) {
+            // Insertar un registro de Tema
+            Tema::create([
+                "id" => $i,
+                "titulo_tema" => "Tema " . $i,
+                "desc_tema" => "Descripción del Tema " . $i,
+                "created_at" => "2023-11-02 01:59:25",
+                "updated_at" => "2023-11-02 01:59:25",
+            ]);
+
+            // Insertar un registro de Seccion relacionado al Tema
+            Seccione::create([
+                "id" => $i,
+                "id_tema_fk" => $i,
+                "titulo_seccion" => "Sección " . $i,
+                "created_at" => "2023-11-02 01:59:25",
+                "updated_at" => "2023-11-02 01:59:25",
+            ]);
+        }
 
         \App\Models\User::factory()->create([
             'id_rol_fk' => '1',
