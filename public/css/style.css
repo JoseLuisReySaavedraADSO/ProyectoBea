@@ -299,3 +299,75 @@
     
 
 }
+
+/* SECCIONES Y TEMAS */
+    .lista {
+        counter-reset: li;
+        list-style: none;
+        font: 15px 'trebuchet MS', 'lucida sans';
+        padding: 0;
+        margin: 0 auto;
+        max-width: 50%;
+        margin-bottom: 4em;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+    }
+    
+    .lista ol {
+        margin: 0 0 0 2em;
+    }
+    
+    .lista li {
+        position: relative;
+        display: block;
+        padding: .4em .4em .4em 2em;
+        margin: .5em 0;
+        background: #00324D;
+        color: #fff;
+        text-decoration: none;
+        border-radius: .3em;
+        transition: all .3s ease-out;
+        cursor: pointer;
+    }
+
+    .lista a {
+        text-decoration: none;
+    }
+    
+    .lista li:hover {
+        background: #00b400;
+    }
+    
+    .lista li:before {
+        content: counter(li);
+        counter-increment: li;
+        position: absolute;
+        left: -1.3em;
+        top: 50%;
+        margin-top: -1.3em;
+        background: #00b400;
+        height: 2em;
+        width: 2em;
+        line-height: 2em;
+        border: .3em solid #fff;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 2em;
+        transition: all .3s ease-out;
+    }
+    
+    .lista .sublista {
+        display: none;
+    }
+    
+    .lista .sublista li::before {
+        content: ''; 
+    }
+    
+    .lista .sublista li:hover {
+        background-color: #fff;
+        color: #00324D;
+    }
+    
+    .lista li.sublista-activa > .sublista {
+        display: block;
+    }

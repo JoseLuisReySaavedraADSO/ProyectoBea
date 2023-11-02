@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // SECTIONS
 
 Route::get('/secciones', [App\Http\Controllers\SeccionesController::class, 'index'])->name('secciones');
+Route::get('/secciones/tema/{id}', [App\Http\Controllers\SeccionesController::class, 'tema'])->name('temas');
+// Route::get('/temas', [App\Http\Controllers\SeccionesController::class, 'tema'])->name('temas');

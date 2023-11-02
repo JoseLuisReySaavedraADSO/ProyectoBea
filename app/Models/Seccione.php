@@ -26,4 +26,9 @@ class Seccione extends Model
     {
         return $this->hasMany(UsuarioSeccion::class, 'id_seccion_fk', 'id');
     }
+    
+    public function temateoriapractica()
+    {
+        return $this->belongsTo(temateoriapractica::class, 'id_tema_fk', 'id');
+    }
 }

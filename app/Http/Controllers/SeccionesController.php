@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seccione;
 use App\Models\Tema;
+use App\Models\TemaTeoriaPractica;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,18 @@ class SeccionesController extends Controller
      */
     public function index()
     {
-        $secciones = Seccione::all();
+        $secciones = Tema::with('secciones')->get(); 
         return view('logged/sections', compact('secciones'));
+    }
+
+
+    public function tema($id)
+    {
+        $temas = Seccione::findOrFail($id);
+        $contenido = TemaTeoriaPractica::all();
+        // $contenido = $temas::with('TemaTeoriaPractica')->get(); 
+        dd($contenido);
+        return view('logged/temas', compact('temas'));
     }
 
     /**

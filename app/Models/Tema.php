@@ -19,7 +19,7 @@ class Tema extends Model
 
     public function secciones()
     {
-        return $this->hasMany(Seccion::class, 'id_tema_fk', 'id');
+        return $this->hasMany(Seccione::class, 'id_tema_fk', 'id');
     }
 
     public function temasTeoriaPractica()
