@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('temas', function (Blueprint $table) {
             $table->id();
             $table->string('titulo_tema', 250)->nullable();
-            $table->string('desc_tema', 250)->nullable();
+            // $table->string('desc_tema', 250)->nullable();
             $table->timestamps();
         });
     }
