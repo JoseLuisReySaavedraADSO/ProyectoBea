@@ -26,6 +26,6 @@ class TemaTeoriaPractica extends Model
 
     public function imagen()
     {
-        return $this->belongsTo(Imagen::class, 'id_img_fk', 'id');
+        return $this->belongsTo(Imagene::class, 'id_img_fk', 'id');
     }
 }

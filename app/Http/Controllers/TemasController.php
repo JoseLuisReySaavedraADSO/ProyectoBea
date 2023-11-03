@@ -8,19 +8,12 @@ use App\Models\TemaTeoriaPractica;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class SeccionesController extends Controller
+class TemasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $secciones = Tema::with('secciones')->get(); 
-        return view('logged/sections', compact('secciones'));
-    }
-
-
-    public function tema($id)
+    public function index($id)
     {
         $temas = Seccione::findOrFail($id);
         // $contenido = TemaTeoriaPractica::where('id_tema_fk', $id)->get();
