@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -42,6 +43,14 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    protected $tiposDocumento = ['Cédula de Ciudadanía','Tarjeta de Identidad','Cédula de Extranjería','Número ciego SENA','Pasaporte','Documento Nacional de Identificación Pasaporte','Número de Identificación Tributaria','PEP - RAMV','PEP','Permiso por Protección Temporal',
+    ];
+
+    protected $departamentos = [
+        'Amazonas','Antioquia','Arauca','Atlántico','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada',
+    ];
+    
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -51,32 +60,35 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $messages = [
-            'regional.required' => 'Este campo es obligatorio.',
-            'telefono.required' => 'Este campo es obligatorio.',
-            'telefono.numeric' => 'Este campo debe ser numérico.',
-            'telefono.digits' => 'El campo teléfono debe tener exactamente 10 dígitos.',
-            'num_doc.required' => 'Este campo es obligatorio.',
-            'num_doc.numeric' => 'Este campo debe ser numérico.',
-            'num_doc.digits_between' => 'El campo número de documento debe tener entre 6 y 10 dígitos.',
-            'num_doc.validation.unique' => 'Ya tienes asociado este documento con otro usuario.',
-            'tipo_doc.required' => 'Este campo es obligatorio.',
-            'correo_inst.required' => 'Este campo es obligatorio.',
-            'correo_alt.required' => 'Este campo es obligatorio.',
-            'regional.required' => 'Este campo es obligatorio.',
-            'fecha_nac.required' => 'Este campo es obligatorio.',
-            'centro_form.required' => 'Este campo es obligatorio.',
+            'required' => 'Este campo es obligatorio.',
+            'numeric' => 'Este campo debe ser numérico.',
+            'digits' => 'Debe tener exactamente 10 dígitos.',
+            'digits_between' => 'Debe tener entre 6 y 10 dígitos.',
+            'unique' => 'Ya tienes asociado este campo con otro usuario.',
+            'regex' => 'Este campo solo deberia tener letras',
+            'fecha_nac.date' => 'El campo de fecha de nacimiento debe ser una fecha válida.',
+            'fecha_nac.before' => 'La fecha de nacimiento no puede ser mayor que la fecha actual.',
+            'fecha_nac.after' => 'La fecha de nacimiento no puede ser menor a 100 años antes de la fecha actual.',
         ];
 
+        $fechaActual = Carbon::now();
+        $fechaHace100Anios = Carbon::now()->subYears(100);
+
         return Validator::make($data, [
-            'nombre' => ['nullable', 'string', 'max:250'],
+            'nombre' => ['nullable', 'string', 'max:250', 'regex:/^[a-zA-Z]+$/'],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'num_doc' => ['required', 'numeric', 'digits_between:6,10', 'unique:users'],
             'tipo_doc' => ['required', 'string', 'max:250'],
             'correo_inst' => ['required', 'string', 'email', 'max:250', 'unique:users'],
             'correo_alt' => ['required', 'string', 'email', 'max:250'],
             'regional' => ['required', 'string', 'max:250'],
-            'fecha_nac' => ['required', 'date'],
-            'centro_form' => ['required', 'string', 'max:250'],
+            'centro_form' => ['required', 'string', 'max:250', 'regex:/^[a-zA-Z]+$/'],
+            'fecha_nac' => [
+                'required',
+                'date',
+                'before:' . $fechaActual,
+                'after:' . $fechaHace100Anios,
+            ],
         ], $messages);
     }
 
@@ -107,5 +119,15 @@ class RegisterController extends Controller
             'remember_token' => $token,
         ]);
     }
-}
 
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm()
+    {
+        // Puedes pasar el array $tiposDocumento a la vista
+        return view('auth.register', ['tiposDocumento' => $this->tiposDocumento, 'departamentosColombia' => $this->departamentos]);
+    }
+}

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.out')
 
 @section('content')
 <main class="registerContainer">
@@ -11,29 +11,17 @@
         <div>
             <div class="form__item">
                 <label class="item__label" for="nombre">{{ __('Nombre') }}</label>
-    
+
                 <div>
-                    <input id="nombre" type="text" class="@error('nombre') is-invalid @enderror item__input" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
-    
-                    @error('nombre')
-                        <span role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input placeholder="@error('nombre') {{$message}} @enderror" id="nombre" type="text" class="@error('nombre') is-invalid @enderror item__input" name="nombre" required autocomplete="nombre" @if (!$errors->has('nombre')) value=" {{ old('nombre') }}" @endif>
                 </div>
             </div>
-    
+
             <div class="form__item">
                 <label class="item__label" for="telefono">{{ __('Telefono') }}</label>
-    
+
                 <div>
-                    <input id="telefono" type="text" class="@error('telefono') is-invalid @enderror item__input" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
-    
-                    @error('telefono')
-                        <span role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input placeholder="@error('telefono') {{$message}} @enderror" id="telefono" type="text" class="@error('telefono') is-invalid @enderror item__input" name="telefono" required autocomplete="telefono" @if (!$errors->has('telefono')) value=" {{ old('telefono') }}" @endif required autocomplete="telefono">
                 </div>
             </div>
         </div>
@@ -41,41 +29,22 @@
         <div>
             <div class="form__item">
                 <label class="item__label" for="tipo_doc">{{ __('Tipo de documento') }}</label>
-    
+
                 <div>
-                    <select id="tipo_doc" class="@error('tipo_doc') is-invalid @enderror item__input" name="tipo_doc">
-                        <option value="" selected>Selecciona un tipo de documento...</option>
-                        <option value="Cédula de Ciudadania">Cédula de Ciudadania</option>
-                        <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
-                        <option value="Cédula de Extranjería">Cédula de Extranjería</option>
-                        <option value="Numero ciego SENA">Numero ciego SENA</option>
-                        <option value="Pasaporte">Pasaporte</option>
-                        <option value="Documento Nacional de Identificación Pasaporte">Documento Nacional de Identificación Pasaporte</option>
-                        <option value="Número de Identificación Tributaria">Número de Identificación Tributaria</option>
-                        <option value="PEP - RAMV">PEP - RAMV</option>
-                        <option value="PEP">PEP</option>
-                        <option value="Permiso por Protección Temporal">Permiso por Protección Temporal</option>
+                    <select id="tipo_doc" class="@error('tipo_doc') is-invalid @enderror item__input" name="tipo_doc" @if (!$errors->has('tipo_doc')) value=" {{ old('tipo_doc') }}" @endif>
+                        <option value="" disabled selected selected>Selecciona un tipo de documento...</option>
+                        @foreach($tiposDocumento as $tipo)
+                        <option value="{{ $tipo }}">{{ $tipo }}</option>
+                        @endforeach
                     </select>
-    
-                    @error('tipo_doc')
-                        <span role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </div>
 
             <div class="form__item">
                 <label class="item__label" for="num_doc">{{ __('Número de documento') }}</label>
-    
+
                 <div>
-                    <input id="num_doc" type="text" class="@error('num_doc') is-invalid @enderror item__input" name="num_doc" required autocomplete="num_doc">
-    
-                    @error('num_doc')
-                        <span role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input placeholder="@error('num_doc') {{$message}} @enderror" id="num_doc" type="text" class="@error('num_doc') is-invalid @enderror item__input" name="num_doc" required autocomplete="num_doc" @if (!$errors->has('num_doc')) value=" {{ old('num_doc') }}" @endif>
                 </div>
             </div>
         </div>
@@ -83,29 +52,17 @@
         <div>
             <div class="form__item">
                 <label class="item__label" for="correo_inst">{{ __('Correo SENA') }}</label>
-    
+
                 <div>
-                    <input id="correo_inst" type="email" class="@error('correo_inst') is-invalid @enderror item__input" name="correo_inst" required autocomplete="correo_inst">
-    
-                    @error('correo_inst')
-                        <span role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input placeholder="@error('correo_inst') {{$message}} @enderror" id="correo_inst" type="email" class="@error('correo_inst') is-invalid @enderror item__input" name="correo_inst" required autocomplete="correo_inst" @if (!$errors->has('correo_inst')) value=" {{ old('correo_inst') }}" @endif>
                 </div>
             </div>
-    
+
             <div class="form__item">
                 <label class="item__label" for="correo_alt">{{ __('Correo alterno') }}</label>
-    
+
                 <div>
-                    <input id="correo_alt" type="email" class="@error('correo_alt') is-invalid @enderror item__input" name="correo_alt" required autocomplete="correo_alt">
-    
-                    @error('correo_alt')
-                        <span role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input placeholder="@error('correo_alt') {{$message}} @enderror" id="correo_alt" type="email" class="@error('correo_alt') is-invalid @enderror item__input" name="correo_alt" required autocomplete="correo_alt" @if (!$errors->has('correo_alt')) value=" {{ old('correo_alt') }}" @endif>
                 </div>
             </div>
         </div>
@@ -113,34 +70,23 @@
         <div>
             <div class="form__item">
                 <label class="item__label" for="regional">{{ __('Regional') }}</label>
-    
+
                 <div>
-                    <select id="regional" class="@error('regional') is-invalid @enderror item__input" name="regional">
-                        <option value="" selected>Selecciona una regional...</option>
-                        <option value="Santander">Santander</option>
-                        <option value="Antioquia">Antioquia</option>
+                    <select id="regional" class="@error('regional') is-invalid @enderror item__input" name="regional" @if (!$errors->has('regional')) value=" {{ old('regional') }}" @endif>
+                        <option value="" disabled selected>Selecciona una regional...</option>
+                        @foreach($departamentosColombia as $departamento)
+                        <option value="{{ $departamento }}">{{ $departamento }}</option>
+                        @endforeach
                     </select>
-    
-                    @error('regional')
-                        <span role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </div>
-    
-    
+
+
             <div class="form__item">
                 <label class="item__label" for="centro_form">{{ __('Centro de formación') }}</label>
-    
+
                 <div>
-                    <input id="centro_form" type="text" class="@error('centro_form') is-invalid @enderror item__input" name="centro_form" required autocomplete="centro_form">
-    
-                    @error('centro_form')
-                        <span role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input placeholder="@error('centro_form') {{$message}} @enderror" id="centro_form" type="text" class="@error('centro_form') is-invalid @enderror item__input" name="centro_form" required autocomplete="centro_form" @if (!$errors->has('centro_form')) value=" {{ old('centro_form') }}" @endif>
                 </div>
             </div>
         </div>
@@ -149,22 +95,24 @@
             <label class="item__label" for="fecha_nac">{{ __('Fecha de nacimiento') }}</label>
 
             <div>
-                <input id="fecha_nac" type="date" class="@error('fecha_nac') is-invalid @enderror item__input" name="fecha_nac" required autocomplete="fecha_nac">
+                <input id="fecha_nac" type="date" class="@error('fecha_nac') is-invalid @enderror item__input" name="fecha_nac" required autocomplete="fecha_nac" @if (!$errors->has('fecha_nac')) value=" {{ old('fecha_nac') }}" @endif>
 
                 @error('fecha_nac')
-                    <span role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <span class="alert" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
         </div>
 
         <div class="form__button">
-            <button class="button" type="button" onclick="history.back()">Atrás</button>
+            <a href="{{ url('/') }}">
+                <button class="button" type="button">{{ __('Atras') }}</button>
+            </a>
             <button class="button" type="submit">{{ __('Iniciar') }}</button>
         </div>
     </form>
-    
+
     <div class="registerContainer__logo">
         <img class="registerContainer__logo--img" src="{{ asset('/img/boceto logo 2.png') }}" alt="Logo Bea">
     </div>

@@ -1,5 +1,5 @@
 <title>Bea | Login</title>
-@extends('layouts.app')
+@extends('layouts.out')
 
 @section('content')
 
@@ -15,29 +15,27 @@
                 <label class="item__label" for="correo_inst" class="left-label">{{ __('Correo Institucional') }}</label>
                 <br>
                 <input class="item__input" type="email" name="correo_inst" placeholder="Correo" autofocus>
-                @error('email')
-                    <span class="form__alert" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                @error('correo_inst')
+                <span class="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
             </div>
             <div class="form__item">
                 <label class="item__label" for="password" class="left-label">{{ __('Contraseña') }}</label>
                 <br>
                 <input class="item__input" type="password" name="password" placeholder="Contraseña">
-                @error('email')
-                    <span class="form__alert" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+
             </div>
             <div class="form__button">
-                <button class="button" type="button" onclick="history.back()">Atrás</button>
+                <a href="{{ url('/') }}">
+                    <button class="button" type="button">{{ __('Atras') }}</button>
+                </a>
                 <button class="button" type="submit">{{ __('Iniciar') }}</button>
             </div>
         </form>
     </div>
-    
+
     <img src="{{ asset('/img/logoSena 1.png') }}" alt="Logo sena" class="welcomeContainer__sena">
 </main>
 @endsection
