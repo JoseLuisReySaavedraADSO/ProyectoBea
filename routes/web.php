@@ -29,6 +29,6 @@ Route::get('/secciones/tema/{id}', [App\Http\Controllers\TemasController::class,
 
 // DASHBOARD
 // dd(auth()->user());
-Route::get('/dashboard/secciones', [App\Http\Controllers\DashboardController::class, 'secciones'])->name('secciones')->middleware('checkUserRole');
-Route::get('/dashboard/temas', [App\Http\Controllers\DashboardController::class, 'temas'])->name('temas')->middleware('checkUserRole');
-Route::get('/dashboard/teorias', [App\Http\Controllers\DashboardController::class, 'teorias'])->name('teorias')->middleware('checkUserRole');
+Route::get('/dashboard/secciones', [App\Http\Controllers\DashboardController::class, 'secciones'])->name('dashboard.secciones')->middleware('checkUserRole');
+Route::get('/dashboard/temas', [App\Http\Controllers\DashboardController::class, 'temas'])->name('dashboard.temas')->middleware('checkUserRole');
+Route::get('/dashboard/teorias', [App\Http\Controllers\DashboardController::class, 'teorias'])->name('dashboard.teorias')->middleware('checkUserRole');

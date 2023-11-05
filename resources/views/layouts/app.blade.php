@@ -56,7 +56,7 @@
                         @else
                             @if(auth()->user()->id_rol_fk === 1)
                             <li class="nav-item">
-                                <a href="{{ route('dashboard') }}">Dashboard</a>
+                                <a href="{{ route('dashboard.secciones') }}">Dashboard</a>
                             </li>
                             @endif
                             <li class="nav-item">
