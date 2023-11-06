@@ -44,9 +44,9 @@
                 </li>
                 <li @if(isset($currentRoute) && $currentRoute==='dashboard.roles' )
                     class="selected" @endif>
-                    <a href="#0">
+                    <a href="{{ route('view', ['view' => 'dashboard.users.view']) }}">
                         <i class='bx bxs-key'></i>
-                        <span>Roles</span>
+                        <span> Usuarios </span>
                     </a>
                 </li>
                 

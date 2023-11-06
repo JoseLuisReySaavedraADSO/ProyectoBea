@@ -33,3 +33,6 @@ Route::get('/dashboard/secciones', [App\Http\Controllers\DashboardController::cl
 Route::get('/dashboard/temas', [App\Http\Controllers\DashboardController::class, 'temas'])->name('dashboard.temas')->middleware('checkUserRole');
 Route::get('/dashboard/teorias', [App\Http\Controllers\DashboardController::class, 'teorias'])->name('dashboard.teorias')->middleware('checkUserRole');
 Route::get('/secciones/edit/{id}', [App\Http\Controllers\SeccionesController::class, 'edit'])->name('dashboard.secciones.edit')->middleware('checkUserRole');
+
+Route::get('/userAction/{action}/{id?}', [App\Http\Controllers\UserController::class, '__invoke'])->name('userAction');
+Route::get('/{view}', [App\Http\Controllers\HomeController::class, 'views'])->name('view');

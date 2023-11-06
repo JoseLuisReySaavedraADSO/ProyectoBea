@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -24,5 +25,17 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function views($view)
+    {
+        if ($view === 'dashboard.users.view') { 
+            $data = User::paginate(100);
+            
+            return view($view, compact('data'));
+
+        }else{
+            return view($view);
+        }
     }
 }
