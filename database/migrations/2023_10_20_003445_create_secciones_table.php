@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('secciones', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_tema_fk')->nullable();
+            $table->unsignedBigInteger('id_tema_fk')->nullable()->onDelete('set null');;
             $table->string('titulo_seccion', 250)->nullable();
             $table->string('desc_seccion', 250)->nullable();
             $table->timestamps();

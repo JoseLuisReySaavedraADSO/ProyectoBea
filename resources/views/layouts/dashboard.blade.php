@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    
+
     <header class="page-header">
         <nav>
             <a href="#0" aria-label="forecastr logo" class="logo">
@@ -42,25 +42,27 @@
                         <span>Inicio</span>
                     </a>
                 </li>
-                <li>
+                <li @if(isset($currentRoute) && $currentRoute==='dashboard.roles' )
+                    class="selected" @endif>
                     <a href="#0">
                         <i class='bx bxs-key'></i>
                         <span>Roles</span>
                     </a>
                 </li>
-                <li>
+                
+                <li @if(isset($currentRoute) && in_array($currentRoute, ['dashboard.secciones', 'dashboard.secciones.edit'])) class="selected" @endif>
                     <a href="{{ route('dashboard.secciones') }}">
                         <i class='bx bxs-objects-horizontal-left'></i>
                         <span>Secciones</span>
                     </a>
                 </li>
-                <li>
+                <li @if(isset($currentRoute) && $currentRoute==='dashboard.temas' ) class="selected" @endif>
                     <a href="{{ route('dashboard.temas') }}">
                         <i class='bx bxs-edit-alt'></i>
                         <span>Temas</span>
                     </a>
                 </li>
-                <li>
+                <li @if(isset($currentRoute) && $currentRoute==='dashboard.teorias' ) class="selected" @endif>
                     <a href="{{ route('dashboard.teorias') }}">
                         <i class='bx bxs-message-dots'></i>
                         <span>Teorias</span>
@@ -87,7 +89,7 @@
 
     </header>
     <section class="page-content">
-
+        
         @yield('content')
 
     </section>

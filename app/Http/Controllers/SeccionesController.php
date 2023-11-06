@@ -60,9 +60,11 @@ class SeccionesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $seccion = Tema::findOrFail($id);
+
+        return view('dashboard/secciones/edit', compact('seccion'));
     }
 
     /**

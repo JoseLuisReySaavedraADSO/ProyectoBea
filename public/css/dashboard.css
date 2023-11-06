@@ -308,3 +308,13 @@ body {
         width: calc(100% - 40px);
     }
 }
+
+.selected {
+    background-color: var(--colorTerceario);
+    /* color: var(--colorSecundario); */
+}
+
+.selected a span,
+.selected i {
+    color: var(--colorSecundario);
+}
