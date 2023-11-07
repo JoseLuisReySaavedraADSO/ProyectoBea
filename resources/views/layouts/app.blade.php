@@ -60,6 +60,10 @@
                             </li>
                             @endif
                             <li class="nav-item">
+                                <a href="{{ route('view', ['view' => 'profile.user']) }}">Perfil</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a href="{{ route('secciones') }}">Secciones</a>
                             </li>
 

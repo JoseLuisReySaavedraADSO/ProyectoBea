@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,6 +26,8 @@ class UserController extends Controller
             return $this->update(request(), $id);
         }elseif ($action === 'delete') {
             return $this->delete($id);
+        }elseif ($action === 'profile') {
+            return $this->profile(request());
         }
     }
 
@@ -124,5 +127,26 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('view', ['view' => 'dashboard.users.view'])->with('success', 'Usuario eliminado exitosamente.');
+    }
+
+    protected function profile(Request $request)
+    {
+        // $this->validator($request->all())->validate();
+
+        $user = Auth::user();
+
+        $user->nombre = $request->input('nombre');
+        $user->telefono = $request->input('telefono');
+        $user->num_doc = $request->input('num_doc');
+        $user->tipo_doc = $request->input('tipo_doc');
+        $user->correo_inst = $request->input('correo_inst');
+        $user->correo_alt = $request->input('correo_alt');
+        $user->regional = $request->input('regional');
+        $user->fecha_nac = $request->input('fecha_nac');
+        $user->centro_form = $request->input('centro_form');
+        
+        $user->save();
+
+        return redirect()->route('view', ['view' => 'profile.user'])->with('success', 'Usuario actualizado exitosamente.');
     }
 }
