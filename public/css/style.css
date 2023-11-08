@@ -115,7 +115,15 @@
     max-width: 280px;
 }
 
-.form__item {
+.loginContainer__form a{
+    text-decoration: none;
+    color: var(--colorPrincipal);
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 35px;
+}
+
+.form__item{
     margin: 12px auto;
 }
 
@@ -231,9 +239,8 @@
         justify-content: center;
         gap: 50px;
     }
-
-    .welcomeContainer__sena {
-        top: 10px;
+    .welcomeContainer__sena{
+        top: 60px;
         left: 10px;
     }
 

@@ -27,12 +27,20 @@
                 <input class="item__input" type="password" name="password" placeholder="Contraseña">
 
             </div>
+
+            <!-- @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('¿Olvidaste tu contraseña?') }}
+                </a>
+            @endif -->
+
             <div class="form__button">
                 <a href="{{ url('/') }}">
                     <button class="button" type="button">{{ __('Atras') }}</button>
                 </a>
                 <button class="button" type="submit">{{ __('Iniciar') }}</button>
             </div>
+            
         </form>
     </div>
 
