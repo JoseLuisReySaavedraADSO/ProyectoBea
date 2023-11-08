@@ -42,28 +42,27 @@
                         <span>Inicio</span>
                     </a>
                 </li>
-                <li @if(isset($currentRoute) && in_array($currentRoute, ['view', 'userAction']))
-                    class="selected" @endif>
+                <li @if(isset($Url) && (strpos($Url, 'user') !== false)) class="selected" @endif>
                     <a href="{{ route('view', ['view' => 'dashboard.users.view']) }}">
                         <i class='bx bxs-key'></i>
                         <span> Usuarios </span>
                     </a>
                 </li>
                 
-                <li @if(isset($currentRoute) && in_array($currentRoute, ['dashboard.secciones', 'dashboard.secciones.edit'])) class="selected" @endif>
-                    <a href="{{ route('dashboard.secciones') }}">
+                <li @if(isset($Url) && (strpos($Url, 'dashboard/secciones') !== false)) class="selected" @endif>
+                    <a href="{{ route('dashboardAction', ['action' => 'secciones']) }}">
                         <i class='bx bxs-objects-horizontal-left'></i>
                         <span>Secciones</span>
                     </a>
                 </li>
-                <li @if(isset($currentRoute) && in_array($currentRoute, ['dashboard.temas', 'dashboard.temas.edit'])) class="selected" @endif>
-                    <a href="{{ route('dashboard.temas') }}">
+                <li @if(isset($Url) && (strpos($Url, 'dashboard/temas') !== false)) class="selected" @endif>
+                    <a href="{{ route('dashboardAction', ['action' => 'temas']) }}">
                         <i class='bx bxs-edit-alt'></i>
                         <span>Temas</span>
                     </a>
                 </li>
-                <li @if(isset($currentRoute) && $currentRoute==='dashboard.teorias' ) class="selected" @endif>
-                    <a href="{{ route('dashboard.teorias') }}">
+                <li @if(isset($Url) && (strpos($Url, 'dashboard/teorias') !== false)) class="selected" @endif>
+                    <a href="{{ route('dashboardAction', ['action' => 'teorias']) }}">
                         <i class='bx bxs-message-dots'></i>
                         <span>Teorias</span>
                     </a>

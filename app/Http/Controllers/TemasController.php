@@ -10,6 +10,21 @@ use Illuminate\Http\Request;
 
 class TemasController extends Controller
 {
+  public function __invoke($action, $id = null)
+  {
+    switch ($action) {
+      case 'create':
+        return $this->create(request());
+      case 'edit':
+        return $this->edit($id);
+      case 'update':
+        return $this->update(request(), $id);
+      case 'delete':
+        return $this->delete($id);
+      default:
+        return response()->json(['error' => 'Acción no válida'], 400);
+    }
+  }
   /**
    * Display a listing of the resource.
    */
@@ -57,7 +72,7 @@ class TemasController extends Controller
 
     Tema::create($data);
 
-    return redirect()->route('dashboard.temas')->with('success', 'Tema agregada exitosamente');
+    return redirect()->route('dashboardAction', ['action' => 'temas'])->with('success', 'Tema agregada exitosamente');
   }
 
   /**
@@ -110,13 +125,13 @@ class TemasController extends Controller
       'id_seccion_fk' => $data->input('id_seccion') ?: null,
     ]);
 
-    return redirect()->route('dashboard.temas')->with('success', 'Tema actualizada exitosamente');
+    return redirect()->route('dashboardAction', ['action' => 'temas'])->with('success', 'Tema actualizada exitosamente');
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function delete($id)
   {
     // Buscar la mascota por su ID
     $tema = Tema::findOrFail($id);
@@ -124,6 +139,6 @@ class TemasController extends Controller
     // Eliminar la mascota
     $tema->delete();
 
-    return redirect()->route('dashboard.temas')->with('success', 'Tema eliminada exitosamente');
+    return redirect()->route('dashboardAction', ['action' => 'temas'])->with('success', 'Tema eliminada exitosamente');
   }
 }

@@ -1,6 +1,6 @@
 <title>Editar | Secciones</title>
 @php
-$currentRoute = \Route::currentRouteName();
+$Url = $_SERVER['REQUEST_URI'];
 @endphp
 @extends('dashboard.secciones.secciones')
 {{-- @extends('layouts.dashboard') --}}
@@ -13,13 +13,13 @@ $currentRoute = \Route::currentRouteName();
     <article>
     <div style="display: flex; justify-content: space-between;">
             <h2>Estas editando la seccion con el id {{$seccionId->id}}</h2>
-            <a href=" {{ route('dashboard.secciones') }}">
+            <a href=" {{ route('dashboardAction', ['action' => 'secciones']) }}">
                 <i class="bx bx-x"></i>
             </a>
         </div>
         <br>
 
-        <form method="POST" action="{{ route('dashboard.secciones.update', $seccionId->id) }}">
+        <form method="GET" action="{{ route('seccionesAction', ['action' => 'update', 'id' => $seccionId->id]) }}">
             @csrf
             
             <label for="titulo_seccion"></label>

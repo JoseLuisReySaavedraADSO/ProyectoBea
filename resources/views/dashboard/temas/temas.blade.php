@@ -1,8 +1,9 @@
-@extends('layouts.dashboard')
 <title>Herramientas | Temas</title>
 @php
-    $currentRoute = \Route::currentRouteName();
+    $Url = $_SERVER['REQUEST_URI'];
 @endphp
+@extends('layouts.dashboard')
+
 @section('content')
     @if (session('success'))
         <article style="background-color: rgb(126, 245, 126)">
@@ -21,7 +22,7 @@
                 <a href="#" class="cerrar-formulario">
                     <i class="bx bx-x"></i>
                 </a>
-                <form method="post" action=" {{ route('dashboard.temas.add') }} ">
+                <form method="GET" action="{{ route('temasAction', ['action' => 'edit']) }}">
                     @csrf
                     <!-- Campos del formulario para agregar una sección -->
                     <label for="titulo_tema">Título del Tema</label>
@@ -61,20 +62,14 @@
                             @endif
                         </th>
                         <th>
-                            <a href="{{ route('dashboard.temas.edit', $tema->id) }}">
+                            <a href="{{ route('temasAction', ['action' => 'edit', 'id' => $tema->id]) }}">
                                 <i class="bx bx-edit-alt"></i>
                             </a>
                         </th>
                         <th>
-                            <a href="#"
-                                onclick="event.preventDefault(); document.getElementById('delete-form-{{ $tema->id }}').submit();"><i
-                                    class="bx bx-trash"></i></a>
-                            <form id="delete-form-{{ $tema->id }}"
-                                action="{{ route('dashboard.temas.delete', $tema->id) }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                            </form>
+                            <a href="{{ route('temasAction', ['action' => 'delete', 'id' => $tema->id]) }}">
+                                <i class="bx bx-trash"></i>
+                            </a>
                         </th>
                     </tr>
                 @endforeach

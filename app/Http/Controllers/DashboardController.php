@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    public function __invoke($action, $id = null)
+    {
+        switch ($action) {
+            case 'secciones':
+                return $this->secciones();
+            case 'temas':
+                return $this->temas();
+            case 'teorias':
+                return $this->teorias();
+        }
+    }
+
     public function secciones()
     {
         $secciones = Seccione::all();

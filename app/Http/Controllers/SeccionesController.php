@@ -10,6 +10,22 @@ use Illuminate\Http\Request;
 
 class SeccionesController extends Controller
 {
+  public function __invoke($action, $id = null)
+  {
+    switch ($action) {
+      case 'create':
+        return $this->create(request());
+      case 'edit':
+        return $this->edit($id);
+      case 'update':
+        return $this->update(request(), $id);
+      case 'delete':
+        return $this->delete($id);
+      default:
+        return response()->json(['error' => 'Acción no válida'], 400);
+    }
+  }
+  
   /**
    * Display a listing of the resource.
    */
@@ -34,17 +50,9 @@ class SeccionesController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-    //
-  }
-
-  /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function create(Request $request)
   {
     $request->validate(
       [
@@ -62,7 +70,7 @@ class SeccionesController extends Controller
 
     Seccione::create($data);
 
-    return redirect()->route('dashboard.secciones')->with('success', 'Sección agregada exitosamente');
+    return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Sección agregada exitosamente');
   }
 
 
@@ -111,13 +119,13 @@ class SeccionesController extends Controller
       'titulo_seccion' => $data->input('titulo_seccion'),
     ]);
 
-    return redirect()->route('dashboard.secciones')->with('success', 'Seccion actualizada exitosamente');
+    return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Seccion actualizada exitosamente');
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy($id)
+  public function delete($id)
   {
     // Buscar la mascota por su ID
     $seccion = Seccione::findOrFail($id);
@@ -125,6 +133,6 @@ class SeccionesController extends Controller
     // Eliminar la mascota
     $seccion->delete();
 
-    return redirect()->route('dashboard.secciones')->with('success', 'Seccion eliminada exitosamente');
+    return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Seccion eliminada exitosamente');
   }
 }

@@ -2,7 +2,7 @@
 <title>Herramientas | Teorias</title>
 
 @php
-$currentRoute = \Route::currentRouteName();
+$Url = $_SERVER['REQUEST_URI'];
 @endphp
 @section('content')
 

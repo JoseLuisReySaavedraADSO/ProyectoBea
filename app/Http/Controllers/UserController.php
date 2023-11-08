@@ -18,17 +18,20 @@ class UserController extends Controller
 
     public function __invoke($action, $id = null)
     {
-        if ($action === 'create') {
-            return $this->create(request()->all());
-        } elseif($action === 'edit') {
-            return $this->edit($id);
-        }elseif($action === 'update') {
-            return $this->update(request(), $id);
-        }elseif ($action === 'delete') {
-            return $this->delete($id);
-        }elseif ($action === 'profile') {
-            return $this->profile(request());
-        }
+        switch ($action) {
+            case 'create':
+                return $this->create(request()->all());
+            case 'edit':
+                return $this->edit($id);
+            case 'update':
+                return $this->update(request(), $id);
+            case 'delete':
+                return $this->delete($id);
+            case 'profile':
+                return $this->profile(request());
+            default:
+                return response()->json(['error' => 'Acción no válida'], 400);
+            }
     }
 
 
