@@ -189,7 +189,7 @@ body {
 }
 
 .page-content .grid article {
-    display: flex;
+    /* display: flex; */
     padding: 30px;
     height: auto;
     background: var(--blanco);
@@ -317,4 +317,40 @@ body {
 .selected a span,
 .selected i {
     color: var(--colorSecundario);
+}
+
+
+/* Estilos para el artículo del formulario */
+#formulario {
+    display: none; /* Inicialmente oculto */
+}
+
+/* Mostrar el artículo cuando se hace clic en #formulario */
+#formulario:target {
+    display: block;
+}
+
+/* Estilos para el enlace "Cerrar" dentro del formulario */
+.cerrar-formulario {
+    float: right;
+    color: red;
+    text-decoration: none;
+}
+
+/* Estilos para el enlace "Agregar Sección" en la esquina superior derecha */
+.abrir-formulario {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#abrir-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* Ocultar el botón cuando el formulario está visible */
+#formulario:target + #abrir-btn {
+    display: none;
 }

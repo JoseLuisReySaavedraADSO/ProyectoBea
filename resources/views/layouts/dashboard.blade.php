@@ -42,7 +42,7 @@
                         <span>Inicio</span>
                     </a>
                 </li>
-                <li @if(isset($currentRoute) && $currentRoute==='dashboard.roles' )
+                <li @if(isset($currentRoute) && in_array($currentRoute, ['view', 'userAction']))
                     class="selected" @endif>
                     <a href="{{ route('view', ['view' => 'dashboard.users.view']) }}">
                         <i class='bx bxs-key'></i>
@@ -56,7 +56,7 @@
                         <span>Secciones</span>
                     </a>
                 </li>
-                <li @if(isset($currentRoute) && $currentRoute==='dashboard.temas' ) class="selected" @endif>
+                <li @if(isset($currentRoute) && in_array($currentRoute, ['dashboard.temas', 'dashboard.temas.edit'])) class="selected" @endif>
                     <a href="{{ route('dashboard.temas') }}">
                         <i class='bx bxs-edit-alt'></i>
                         <span>Temas</span>
@@ -68,6 +68,7 @@
                         <span>Teorias</span>
                     </a>
                 </li>
+                
                 <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class='bx bx-power-off'></i>

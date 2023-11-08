@@ -3,13 +3,14 @@
 @section('content')
 
 <ol class="lista">
-    @foreach ($secciones as $tema)
-    <li>{{$tema->titulo_tema}}
-        @if($tema->secciones->count() > 0)
+    @foreach ($secciones as $seccion)
+    <li>{{$seccion->titulo_seccion}}
+      @if($seccion->tema->count() > 0)
+      {{-- {{dd($seccion->tema);}} --}}
             <ol class="sublista">
-                @foreach ($tema->secciones as $seccion)
-                <a href="{{ route('temas', $seccion->id) }}">
-                    <li>{{$seccion->titulo_seccion}}</li>
+                @foreach ($seccion->tema as $tema)
+                <a href="{{ route('temas', $tema->id) }}">
+                    <li>{{$tema->titulo_tema}}</li>
                 </a>
                 @endforeach
             </ol>

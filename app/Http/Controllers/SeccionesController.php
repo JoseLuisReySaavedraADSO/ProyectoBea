@@ -10,76 +10,121 @@ use Illuminate\Http\Request;
 
 class SeccionesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $secciones = Tema::with('secciones')->get(); 
-        return view('logged/sections', compact('secciones'));
-    }
+  /**
+   * Display a listing of the resource.
+   */
+  public function index()
+  {
+    $secciones = Seccione::with('tema')->get();
+    return view('logged/sections', compact('secciones'));
+  }
 
 
-    public function tema($id)
-    {
-        $temas = Seccione::findOrFail($id);
-        // $contenido = TemaTeoriaPractica::where('id_tema_fk', $id)->get();
-        $contenido = TemaTeoriaPractica::with('teoria', 'imagen', 'practica')
-            ->where('id_tema_fk', $id)
-            ->get();
+  public function tema($id)
+  {
+    $temas = Tema::findOrFail($id);
+    // $contenido = TemaTeoriaPractica::where('id_tema_fk', $id)->get();
+    $contenido = TemaTeoriaPractica::with('teoria', 'imagen', 'practica')
+      ->where('id_tema_fk', $id)
+      ->get();
 
-        // $contenido = $temas::with('TemaTeoriaPractica')->get(); 
-        // dd($contenido);
-        return view('logged/temas', compact('contenido'));
-    }
+    // $contenido = $temas::with('TemaTeoriaPractica')->get(); 
+    // dd($contenido);
+    return view('logged/temas', compact('contenido'));
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  /**
+   * Show the form for creating a new resource.
+   */
+  public function create()
+  {
+    //
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(Request $request)
+  {
+    $request->validate(
+      [
+        'titulo_seccion' => 'required|max:250',
+      ],
+      [
+        'titulo_seccion.required' => 'El Título es obligatorio.',
+        'titulo_seccion.max' => 'El título no debe superar los 250 caracteres.',
+      ]
+    );
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    $data = [
+      'titulo_seccion' => $request->input('titulo_seccion'),
+    ];
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        $seccion = Tema::findOrFail($id);
+    Seccione::create($data);
 
-        return view('dashboard/secciones/edit', compact('seccion'));
-    }
+    return redirect()->route('dashboard.secciones')->with('success', 'Sección agregada exitosamente');
+  }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   */
+  public function show(string $id)
+  {
+    //
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   */
+  public function edit($id)
+  {
+    $secciones = Seccione::all();
+    $seccionId = Seccione::findOrFail($id);
+
+    return view('dashboard/secciones/edit', compact('seccionId', 'secciones'));
+  }
+
+  /**
+   * Update the specified resource in storage.
+   */
+  public function update(Request $data, $id)
+  {
+    $rules = [
+      'titulo_seccion' => 'required|max:250',
+    ];
+
+    // Mensajes de error personalizados
+    $messages = [
+      'name.required' => 'El Titulo es obligatorio.',
+      'name.max' => 'El nombre no debe superar los 250 caracteres.',
+    ];
+
+    // Valida los datos de entrada con las reglas definidas
+    $this->validate($data, $rules, $messages);
+
+    // Buscar la seccion por su ID
+    $seccion = Seccione::findOrFail($id);
+
+    // Actualizar los campos de la mascota utilizando los valores del formulario
+    $seccion->update([
+      'titulo_seccion' => $data->input('titulo_seccion'),
+    ]);
+
+    return redirect()->route('dashboard.secciones')->with('success', 'Seccion actualizada exitosamente');
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy($id)
+  {
+    // Buscar la mascota por su ID
+    $seccion = Seccione::findOrFail($id);
+
+    // Eliminar la mascota
+    $seccion->delete();
+
+    return redirect()->route('dashboard.secciones')->with('success', 'Seccion eliminada exitosamente');
+  }
 }

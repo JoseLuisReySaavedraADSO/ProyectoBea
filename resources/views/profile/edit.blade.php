@@ -13,7 +13,7 @@
           <th scope="col"> Nombre del dato</th>
 
           <th scope="col"> 
-            <a href="{{ route('view', ['view' => 'user.user']) }}" class="btn btn-secondary"> Regresar </a>
+            <a href="{{ route('view', ['view' => 'profile.user']) }}" class="btn btn-secondary"> Regresar </a>
             <button type="submit" class="btn btn-primary"> Guardar </button> 
           </th>
         </tr>
