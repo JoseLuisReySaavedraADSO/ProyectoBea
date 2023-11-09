@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Seccione;
 use App\Models\Tema;
+use App\Models\TemaTeoriaPractica;
+use App\Models\Teoria;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -37,6 +39,9 @@ class DashboardController extends Controller
 
     public function teorias()
     {
-        return view('dashboard/teorias/teorias');
+        $teorias = TemaTeoriaPractica::all();
+        $temas = Tema::all();
+
+        return view('dashboard/teorias/teorias', compact('teorias', 'temas'));
     }
 }

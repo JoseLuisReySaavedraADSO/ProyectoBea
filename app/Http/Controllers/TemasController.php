@@ -42,17 +42,9 @@ class TemasController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-    //
-  }
-
-  /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function create(Request $request)
   {
     $request->validate(
       [
@@ -73,14 +65,6 @@ class TemasController extends Controller
     Tema::create($data);
 
     return redirect()->route('dashboardAction', ['action' => 'temas'])->with('success', 'Tema agregada exitosamente');
-  }
-
-  /**
-   * Display the specified resource.
-   */
-  public function show(string $id)
-  {
-    //
   }
 
   /**

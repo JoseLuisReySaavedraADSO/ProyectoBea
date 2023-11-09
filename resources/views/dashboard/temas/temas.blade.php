@@ -22,7 +22,7 @@
                 <a href="#" class="cerrar-formulario">
                     <i class="bx bx-x"></i>
                 </a>
-                <form method="GET" action="{{ route('temasAction', ['action' => 'edit']) }}">
+                <form method="GET" action="{{ route('temasAction', ['action' => 'create']) }}">
                     @csrf
                     <!-- Campos del formulario para agregar una sección -->
                     <label for="titulo_tema">Título del Tema</label>
@@ -30,7 +30,7 @@
                     <select name="id_seccion">
                         <option disabled selected selected> A que seccion pertenece? </option>
                         @foreach ($secciones as $seccion)
-                            <option value="{{ $seccion->id }}">{{ $seccion->titulo_tema }}</option>
+                            <option value="{{ $seccion->id }}">{{ $seccion->titulo_seccion }}</option>
                         @endforeach
                     </select>
                     <!-- Agrega otros campos según sea necesario -->

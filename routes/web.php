@@ -38,6 +38,10 @@ Route::get('/dashboard/secciones/{action}/{id?}', [App\Http\Controllers\Seccione
 
 Route::get('/dashboard/temas/{action}/{id?}', [App\Http\Controllers\TemasController::class, '__invoke'])->name('temasAction')->middleware('checkUserRole');
 
+// TEORIAS
+
+Route::get('/dashboard/teorias/{action}/{id?}', [App\Http\Controllers\TeoriasController::class, '__invoke'])->name('teoriasAction')->middleware('checkUserRole');
+
 // USUARIOS 
 
 Route::get('/userAction/{action}/{id?}', [App\Http\Controllers\UserController::class, '__invoke'])->name('userAction');

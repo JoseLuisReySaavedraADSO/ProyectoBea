@@ -119,8 +119,8 @@
     text-decoration: none;
     color: var(--colorPrincipal);
     font-weight: bold;
-    margin-top: 20px;
-    margin-left: 35px;
+    /* margin-top: 20px; */
+    /* margin-left: 35px; */
 }
 
 .form__item{
@@ -240,7 +240,7 @@
         gap: 50px;
     }
     .welcomeContainer__sena{
-        top: 60px;
+        top: 10px;
         left: 10px;
     }
 

@@ -73,15 +73,6 @@ class SeccionesController extends Controller
     return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Sección agregada exitosamente');
   }
 
-
-  /**
-   * Display the specified resource.
-   */
-  public function show(string $id)
-  {
-    //
-  }
-
   /**
    * Show the form for editing the specified resource.
    */
