@@ -11,7 +11,8 @@ class Practica extends Model
 
     protected $fillable = [
         'id',	
-        'titulo_practica',	
+        'titulo_practica',
+        'pdf_path',	
         'created_at',	
         'updated_at',
     ];

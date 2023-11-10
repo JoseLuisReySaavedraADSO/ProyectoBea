@@ -12,8 +12,9 @@
             <div class="card__temas">
                 <div class="animal__photo">
                     <a href="">
-                        <!-- <img class="temas__photo--image" src="{{ $item->imagen->path }}" alt=""> -->
-                        <img class="temas__photo--image" src="https://cdn-icons-png.flaticon.com/512/2103/2103800.png" alt="">
+                        {{-- {{dd('storage/' . $item->imagen->path)}} --}}
+                        <img class="temas__photo--image" src="{{ asset('storage/' . $item->imagen->path) }}" alt="">
+                        {{-- <img class="temas__photo--image" src="https://cdn-icons-png.flaticon.com/512/2103/2103800.png" alt=""> --}}
                     </a>
                 </div>
                 <div class="temas__info">

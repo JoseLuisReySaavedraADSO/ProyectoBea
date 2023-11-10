@@ -22,15 +22,37 @@
                 <a href="#" class="cerrar-formulario">
                     <i class="bx bx-x"></i>
                 </a>
-                <form method="GET" action="{{ route('teoriasAction', ['action' => 'create']) }}">
+                <form method="POST" action="{{ route('teorias.create') }}"
+                    enctype="multipart/form-data">
                     @csrf
-                    {{-- ACA VA A HABER UN MIERDERO --}}
+
+                    <label for="titulo_teoria">Título de la teoria</label>
+                    <input type="text" name="titulo_teoria">
+
+                    <br>
+
+                    <label for="descripcion_teoria">Descripcion</label>
+                    <br>
+                    <textarea name="descripcion_teoria" cols="30" rows="10"></textarea>
+
+                    <br>
+                    <label for="imagen_teoria">Imagen</label>
+                    <input type="file" name="imagen_teoria" accept="image/*">
+
+                    <br>
+
+                    <label for="pdf_practica">PDF</label>
+                    <input type="file" name="pdf_practica" accept=".pdf">
+
+
                     <select name="id_tema">
                         <option disabled selected selected> A que tema pertenece? </option>
-                            @foreach ($temas as $tema)
-                                <option value="{{ $tema->id }}">{{ $tema->titulo_tema }}</option>
-                            @endforeach
-                        </select>
+                        @foreach ($temas as $tema)
+                            <option value="{{ $tema->id }}">{{ $tema->titulo_tema }}</option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit">Guardar</button>
                 </form>
             </article>
         </div>

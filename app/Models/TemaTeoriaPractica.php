@@ -9,6 +9,16 @@ class TemaTeoriaPractica extends Model
 {
   use HasFactory;
 
+  protected $fillable = [
+    'id',
+    'id_tema_fk',
+    'id_teoria_fk',
+    'id_practica_fk',
+    'id_img_fk',
+    'created_at',
+    'updated_at',
+  ];
+
   public function tema()
   {
     return $this->belongsTo(Tema::class, 'id_tema_fk', 'id');

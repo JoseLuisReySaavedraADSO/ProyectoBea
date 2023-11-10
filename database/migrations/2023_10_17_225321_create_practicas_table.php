@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('practicas', function (Blueprint $table) {
             $table->id();
             $table->string('titulo_practica', 250)->nullable();
+            $table->string('pdf_path')->nullable();
             $table->timestamps();
         });
     }
