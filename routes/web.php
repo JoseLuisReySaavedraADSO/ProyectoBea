@@ -42,7 +42,8 @@ Route::get('/dashboard/temas/{action}/{id?}', [App\Http\Controllers\TemasControl
 // TEORIAS
 
 Route::get('/dashboard/teorias/{action}/{id?}', [App\Http\Controllers\TeoriasController::class, '__invoke'])->name('teoriasAction')->middleware('checkUserRole');
-Route::post('/dashboard/teorias', [App\Http\Controllers\TeoriasController::class, 'create'])->name('teorias.create');
+Route::post('/dashboard/teorias/{action}/{id?}', [App\Http\Controllers\TeoriasController::class, '__invoke'])->name('teoriasAction')->middleware('checkUserRole');
+// Route::post('/dashboard/teorias', [App\Http\Controllers\TeoriasController::class, 'create'])->name('teorias.create');
 
 // USUARIOS 
 

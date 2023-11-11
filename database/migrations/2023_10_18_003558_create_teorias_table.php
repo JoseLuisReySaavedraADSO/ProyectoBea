@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('teorias', function (Blueprint $table) {
             $table->id();
             $table->string('titulo_teoria', 250)->nullable();
-            $table->string('desc_teoria', 250)->nullable();
+            $table->string('desc_teoria', 1000)->nullable();
             $table->timestamps();
         });
     }

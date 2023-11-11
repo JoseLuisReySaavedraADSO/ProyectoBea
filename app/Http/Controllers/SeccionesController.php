@@ -105,7 +105,7 @@ class SeccionesController extends Controller
     // Buscar la seccion por su ID
     $seccion = Seccione::findOrFail($id);
 
-    // Actualizar los campos de la mascota utilizando los valores del formulario
+    // Actualizar los campos de la campo utilizando los valores del formulario
     $seccion->update([
       'titulo_seccion' => $data->input('titulo_seccion'),
     ]);
@@ -118,10 +118,10 @@ class SeccionesController extends Controller
    */
   public function delete($id)
   {
-    // Buscar la mascota por su ID
+    // Buscar la campo por su ID
     $seccion = Seccione::findOrFail($id);
 
-    // Eliminar la mascota
+    // Eliminar la campo
     $seccion->delete();
 
     return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Seccion eliminada exitosamente');

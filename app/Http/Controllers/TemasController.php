@@ -103,7 +103,7 @@ class TemasController extends Controller
     // Buscar la seccion por su ID
     $tema = Tema::findOrFail($id);
 
-    // Actualizar los campos de la mascota utilizando los valores del formulario
+    // Actualizar los campos de la campo utilizando los valores del formulario
     $tema->update([
       'titulo_tema' => $data->input('titulo_tema'),
       'id_seccion_fk' => $data->input('id_seccion') ?: null,
@@ -117,10 +117,10 @@ class TemasController extends Controller
    */
   public function delete($id)
   {
-    // Buscar la mascota por su ID
+    // Buscar la campo por su ID
     $tema = Tema::findOrFail($id);
 
-    // Eliminar la mascota
+    // Eliminar la campo
     $tema->delete();
 
     return redirect()->route('dashboardAction', ['action' => 'temas'])->with('success', 'Tema eliminada exitosamente');

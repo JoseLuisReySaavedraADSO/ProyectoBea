@@ -23,15 +23,15 @@
 
                 {{-- {{dd($temaId->secciones->id)}} --}}
                 <select name="id_seccion">
-                    <option value=" @if (isset($temaId->secciones->id)) {{ $temaId->secciones->id }} @endif " disabled selected
-                        selected>
-                        @if (isset($temaId->secciones->titulo_seccion))
-                            {{ $temaId->secciones->titulo_seccion }}
-                        @endif
-                    </option>
+                    <option disabled>A que seccion pertenece?</option>
                     <option value="">Sin seccion</option>
                     @foreach ($secciones as $seccion)
-                        <option value="{{ $seccion->id }}">{{ $seccion->titulo_seccion }}</option>
+                        <option value="{{ $seccion->id }}" 
+                            @if (isset($temaId->secciones->id) && $temaId->secciones->id == $seccion->id) 
+                                selected   
+                            @endif>
+                            {{ $seccion->titulo_seccion }}
+                        </option>
                     @endforeach
                 </select>
 

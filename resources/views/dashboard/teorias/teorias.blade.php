@@ -10,6 +10,16 @@
             {{ session('success') }}
         </article>
     @endif
+    @if ($errors->any())
+        <article style="background-color: rgb(255, 60, 0)">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </article>
+    @endif
+
 
     <a href="#formulario" class="abrir-formulario" id="abrir-btn">Agregar Temas</a>
 
@@ -22,8 +32,7 @@
                 <a href="#" class="cerrar-formulario">
                     <i class="bx bx-x"></i>
                 </a>
-                <form method="POST" action="{{ route('teorias.create') }}"
-                    enctype="multipart/form-data">
+                <form method="POST" action="{{ route('teoriasAction', ['action' => 'create']) }}" enctype="multipart/form-data">
                     @csrf
 
                     <label for="titulo_teoria">Título de la teoria</label>
@@ -90,18 +99,18 @@
 
 
                         {{-- centrate solo en agregar por ahora --}}
-                        {{-- <th>
-                            <a href="{{ route('temasAction', ['action' => 'edit', 'id' => $teoria->id]) }}">
+                        <th>
+                            <a href="{{ route('teoriasAction', ['action' => 'edit', 'id' => $teoria->id]) }}">
                                 <i class="bx bx-edit-alt"></i>
                             </a>
-                        </th> --}}
+                        </th>
 
 
-                        {{-- <th>
-                            <a href="{{ route('temasAction', ['action' => 'delete', 'id' => $teoria->id]) }}">
+                        <th>
+                            <a href="{{ route('teoriasAction', ['action' => 'delete', 'id' => $teoria->id]) }}">
                                 <i class="bx bx-trash"></i>
                             </a>
-                        </th> --}}
+                        </th>
 
                     </tr>
                 @endforeach
