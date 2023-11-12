@@ -10,67 +10,75 @@
     </section>
     <section class="grid">
         <article>
-            <div style="display: flex; justify-content: space-between;">
-                <h2>Estas editando la teoria con el id {{ $teoriaId->id }}</h2>
-                <a href=" {{ route('dashboardAction', ['action' => 'teorias']) }}">
-                    <i class="bx bx-x"></i>
-                </a>
-            </div>
-            <br>
-
-            <form method="POST" action="{{ route('teoriasAction', ['action' => 'update', 'id' => $teoriaId->id]) }}" enctype="multipart/form-data">
+            <a href="{{ route('dashboardAction', ['action' => 'teorias']) }}" class="cerrar-formulario">
+                <i class="bx bx-x"></i>
+            </a>
+            <form class="register__form" method="POST"
+                action="{{ route('teoriasAction', ['action' => 'update', 'id' => $teoriaId->id]) }}"
+                enctype="multipart/form-data">
                 @csrf
 
-                <label for="titulo_teoria">Título de la teoria</label>
-                <input type="text" name="titulo_teoria" value="{{ $teoriaId->teoria->titulo_teoria }}">
+                <div>
 
-                <br>
+                    <div class="form__item">
+                        <label class="item__label" for="titulo_teoria">Título de la teoria</label>
+                        <br>
+                        <input class="item__input" type="text" name="titulo_teoria" id="titulo_teoria"
+                            value="{{ $teoriaId->teoria->titulo_teoria }}">
+                    </div>
 
-                <label for="descripcion_teoria">Descripcion</label>
-                <br>
-                <textarea name="descripcion_teoria" cols="30" rows="10">{{ $teoriaId->teoria->desc_teoria }}</textarea>
+                    <div class="form__item">
 
-                <br>
-                <label for="imagen_teoria">Imagen</label>
-                @if ($teoriaId->imagen)
-                    @if ($teoriaId->imagen)
-                        <p>Recuerda que si no cambias esta imagen se dejara la anterior:
-                            <a style="text-decoration: underline; color:blue"
-                                href="{{ asset('storage/' . $teoriaId->imagen->path) }}">
-                                {{ $teoriaId->imagen->path }}
-                            </a>
-                        </p>
-                    @endif
-                @endif
-                <input type="file" name="imagen_teoria" accept="image/*">
+                        <label class="item__label" for="id_tema">A que tema pertenece?</label>
+                        <br>
+                        <select class="item__input" name="id_tema">
+                            <option disabled>A que tema pertenece?</option>
+                            @foreach ($temas as $tema)
+                                <option value="{{ $tema->id }}" @if (isset($teoriaId->tema->id) && $teoriaId->tema->id == $tema->id) selected @endif>
+                                    {{ $tema->titulo_tema }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                <br>
+                    </div>
 
-                <label for="pdf_practica">PDF</label>
-                @if ($teoriaId->practica)
-                    <p>Recuerda que si no cambias este pdf se dejara el documento anterior:
-                        <a style="text-decoration: underline; color:blue"
-                            href="{{ asset('storage/' . $teoriaId->practica->pdf_path) }}">
-                            {{ $teoriaId->practica->pdf_path }}
-                        </a>
-                    </p>
-                @endif
-                <input type="file" name="pdf_practica" accept=".pdf">
+                </div>
 
-                <select name="id_tema">
-                    <option disabled>A que tema pertenece?</option>
+                <div>
 
-                    @foreach ($temas as $tema)
-                        <option value="{{ $tema->id }}"
-                            @if (isset($teoriaId->tema->id) && $teoriaId->tema->id == $tema->id)
-                                selected
-                            @endif>
-                            {{ $tema->titulo_tema }}
-                        </option>
-                    @endforeach
-                </select>
+                    <div class="form__item">
+                        <label class="item__label" for="descripcion_teoria">Descripcion</label>
+                        <br>
+                        <textarea class="item__input text_area" name="descripcion_teoria">{{ $teoriaId->teoria->desc_teoria }}</textarea>
+                    </div>
 
-                <button type="submit">Guardar</button>
+                </div>
+
+                <div>
+
+                    
+
+                    <br>
+
+                    <div class="form__item">
+                        <label class="item__label" for="imagen_teoria">Imagen</label>
+                            {{-- <div class="file-select" id="imagen"> --}}
+                                <input type="file" name="imagen_teoria" id="imagen_teoria" accept="image/*">
+                                {{-- <input type="file" name="imagen_teoria" id="imagen_teoria" accept="image/*"> --}}
+                            {{-- </div> --}}
+                    </div>
+
+
+                    <div class="form__item">
+                        <label class="item__label" for="pdf_practica">PDF
+                            {{-- <div class="file-select" id="pdf"></label> --}}
+                                <input type="file" name="pdf_practica" accept=".pdf">
+
+                                {{-- <input type="file" name="pdf_practica" id="pdf_practica" accept=".pdf"> --}}
+                            {{-- </div> --}}
+                    </div>
+                </div>
+                <button class="button button__dashboard" type="submit">Guardar</button>
             </form>
         </article>
     </section>

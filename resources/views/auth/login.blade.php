@@ -12,9 +12,10 @@
         <form class="form" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form__item">
-                <label class="item__label" for="correo_inst" class="left-label">{{ __('Correo Institucional') }}</label>
-                <br>
-                <input class="item__input" type="email" name="correo_inst" placeholder="Correo" autofocus>
+                <label class="item__label left-label" for="correo_inst">{{ __('Correo Institucional') }}</label>
+                {{-- <br> --}}
+                {{-- <input class="item__input" type="email" name="correo_inst" placeholder="Correo" required autofocus> --}}
+                <input class="item__input" type="email" name="correo_inst" id="correo_inst" placeholder="Correo" required autofocus>
                 @error('correo_inst')
                 <span class="alert">
                     <strong>{{ $message }}</strong>
@@ -22,9 +23,9 @@
                 @enderror
             </div>
             <div class="form__item">
-                <label class="item__label" for="password" class="left-label">{{ __('Contraseña') }}</label>
-                <br>
-                <input class="item__input" type="password" name="password" placeholder="Contraseña">
+                <label class="item__label left-label" for="password">{{ __('Contraseña') }}</label>
+                {{-- <br> --}}
+                <input class="item__input" type="password" name="password" id="password" placeholder="Contraseña" required>
 
             </div>
 

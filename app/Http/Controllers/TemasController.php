@@ -38,7 +38,7 @@ class TemasController extends Controller
 
     // $contenido = $temas::with('TemaTeoriaPractica')->get(); 
     // dd($contenido);
-    return view('logged/temas', compact('contenido'));
+    return view('logged/temas', compact('contenido', 'temas'));
   }
 
   /**

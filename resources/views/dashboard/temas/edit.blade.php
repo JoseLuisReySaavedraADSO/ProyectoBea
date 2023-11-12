@@ -10,35 +10,38 @@
     </section>
     <section class="grid">
         <article>
-            <div style="display: flex; justify-content: space-between;">
-                <h2>Estas editando el tema con el id {{ $temaId->id }}</h2>
-                <a href=" {{ route('dashboardAction', ['action' => 'temas']) }}">
-                    <i class="bx bx-x"></i>
-                </a>
-            </div>
-            <br>
+            <a href="{{ route('dashboardAction', ['action' => 'temas']) }}" class="cerrar-formulario">
+                <i class="bx bx-x"></i>
+            </a>
 
             <form method="GET" action="{{ route('temasAction', ['action' => 'update', 'id' => $temaId->id]) }}">
                 @csrf
 
-                {{-- {{dd($temaId->secciones->id)}} --}}
-                <select name="id_seccion">
-                    <option disabled>A que seccion pertenece?</option>
-                    <option value="">Sin seccion</option>
-                    @foreach ($secciones as $seccion)
-                        <option value="{{ $seccion->id }}" 
-                            @if (isset($temaId->secciones->id) && $temaId->secciones->id == $seccion->id) 
-                                selected   
-                            @endif>
-                            {{ $seccion->titulo_seccion }}
-                        </option>
-                    @endforeach
-                </select>
+                <div class="elementos">
 
-                <label for="titulo_tema"></label>
-                <input type="text" name="titulo_tema" placeholder="Titulo" value="{{ $temaId->titulo_tema }}">
+                    <div class="form__item">
+                        <label class="item__label" for="titulo_tema">Título del Tema</label>
+                        <input class="item__input" type="text" name="titulo_tema" id="titulo_tema"
+                            value="{{ $temaId->titulo_tema }}">
+                    </div>
 
-                <button type="submit" class="save">Guardar</button>
+                    <div>
+                        <label class="item__label" for="id_seccion">A que seccion pertenece?</label>
+                        <select class="item__input" name="id_seccion" id="id_seccion">
+                            <option disabled>A que seccion pertenece?</option>
+                            <option value="">Sin seccion</option>
+                            @foreach ($secciones as $seccion)
+                                <option value="{{ $seccion->id }}" @if (isset($temaId->secciones->id) && $temaId->secciones->id == $seccion->id) selected @endif>
+                                    {{ $seccion->titulo_seccion }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <button class="button button__dashboard" type="submit">Guardar</button>
+
+                </div>
+
             </form>
         </article>
     </section>

@@ -21,47 +21,70 @@
     @endif
 
 
-    <a href="#formulario" class="abrir-formulario" id="abrir-btn">Agregar Temas</a>
 
     <section class="grid">
         <div id="formulario">
             <section class="search-and-user">
-                <h1>Agregar | Temas</h1>
+                <h1>Agregar | Teorias</h1>
             </section>
             <article>
                 <a href="#" class="cerrar-formulario">
                     <i class="bx bx-x"></i>
                 </a>
-                <form method="POST" action="{{ route('teoriasAction', ['action' => 'create']) }}" enctype="multipart/form-data">
+                <form class="register__form" method="POST" action="{{ route('teoriasAction', ['action' => 'create']) }}"
+                    enctype="multipart/form-data">
                     @csrf
 
-                    <label for="titulo_teoria">Título de la teoria</label>
-                    <input type="text" name="titulo_teoria">
+                    <div>
 
-                    <br>
+                        <div class="form__item">
+                            <label class="item__label" for="titulo_teoria">Título de la teoria</label>
+                            <br>
+                            <input class="item__input" type="text" name="titulo_teoria" id="titulo_teoria">
+                        </div>
 
-                    <label for="descripcion_teoria">Descripcion</label>
-                    <br>
-                    <textarea name="descripcion_teoria" cols="30" rows="10"></textarea>
+                        <div class="form__item">
+                            <label class="item__label" for="id_tema">A que tema pertenece?</label>
+                            <br>
+                            <select class="item__input" name="id_tema">
+                                <option disabled selected selected> A que tema pertenece? </option>
+                                @foreach ($temas as $tema)
+                                    <option value="{{ $tema->id }}">{{ $tema->titulo_tema }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                    <br>
-                    <label for="imagen_teoria">Imagen</label>
-                    <input type="file" name="imagen_teoria" accept="image/*">
+                    </div>
 
-                    <br>
+                    <div>
 
-                    <label for="pdf_practica">PDF</label>
-                    <input type="file" name="pdf_practica" accept=".pdf">
+                        <div class="form__item">
+                            <label class="item__label" for="descripcion_teoria">Descripcion</label>
+                            <br>
+                            <textarea class="item__input text_area" name="descripcion_teoria"></textarea>
+                        </div>
 
+                    </div>
 
-                    <select name="id_tema">
-                        <option disabled selected selected> A que tema pertenece? </option>
-                        @foreach ($temas as $tema)
-                            <option value="{{ $tema->id }}">{{ $tema->titulo_tema }}</option>
-                        @endforeach
-                    </select>
+                    <div>
 
-                    <button type="submit">Guardar</button>
+                        <div class="form__item">
+                            <label class="item__label" for="imagen_teoria">Imagen
+                            <div class="file-select" id="imagen"></label>
+                                <input type="file" name="imagen_teoria" id="imagen_teoria" accept="image/*">
+                            </div>
+                        </div>
+
+                        
+                        <div class="form__item">
+                            <label class="item__label" for="pdf_practica">PDF
+                            <div class="file-select" id="pdf"></label>
+                                <input type="file" name="pdf_practica" id="pdf_practica" accept=".pdf">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <button class="button button__dashboard" type="submit">Guardar</button>
                 </form>
             </article>
         </div>
@@ -69,53 +92,57 @@
         <section class="search-and-user">
             <h1>Herramientas | Temas</h1>
         </section>
-        <article>
-            <table>
-                <tr>
-                    <th>Titulo</th>
-                    <th>Tema</th>
-                    {{-- <th>practica</th> --}}
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-                @foreach ($teorias as $teoria)
-                    <tr>
-                        <th>{{ $teoria->teoria->titulo_teoria }}</th>
-                        {{-- {{ dd($tema->id_seccion_fk) }} --}}
-                        <th>
-                            @if ($teoria->id_tema_fk !== null)
-                                {{ $teoria->tema->titulo_tema }}
-                            @else
-                                No tiene un tema
-                            @endif
-                        </th>
-                        {{-- <th>
-                            @if ($teoria->id_practica_fk !== null)
-                                {{ $teoria->practica->titulo_practica }}
-                            @else
-                                No tiene un tema
-                            @endif
-                        </th> --}}
+        <div>
+            <a href="#formulario" class="abrir-formulario" id="abrir-btn">Agregar Temas</a>
 
+            <article class="principal">
+                <table class="tabla_4">
+                    <thead>
+                        <th>Titulo</th>
+                        <th>Tema</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </thead>
+                    @foreach ($teorias as $teoria)
+                        <tr>
+                            <th>{{ $teoria->teoria->titulo_teoria }}</th>
+                            {{-- {{ dd($tema->id_seccion_fk) }} --}}
+                            <th>
+                                @if ($teoria->id_tema_fk !== null)
+                                    {{ $teoria->tema->titulo_tema }}
+                                @else
+                                    No tiene un tema
+                                @endif
+                            </th>
+                            {{-- <th>
+                                @if ($teoria->id_practica_fk !== null)
+                                    {{ $teoria->practica->titulo_practica }}
+                                @else
+                                    No tiene un tema
+                                @endif
+                            </th> --}}
+    
+    
+                            {{-- centrate solo en agregar por ahora --}}
+                            <th>
+                                <a href="{{ route('teoriasAction', ['action' => 'edit', 'id' => $teoria->id]) }}">
+                                    <i class="bx bx-edit-alt editar"></i>
+                                </a>
+                            </th>
+    
+    
+                            <th>
+                                <a href="{{ route('teoriasAction', ['action' => 'delete', 'id' => $teoria->id]) }}">
+                                    <i class="bx bx-trash eliminar"></i>
+                                </a>
+                            </th>
+    
+                        </tr>
+                    @endforeach
+                </table>
+            </article>
 
-                        {{-- centrate solo en agregar por ahora --}}
-                        <th>
-                            <a href="{{ route('teoriasAction', ['action' => 'edit', 'id' => $teoria->id]) }}">
-                                <i class="bx bx-edit-alt"></i>
-                            </a>
-                        </th>
-
-
-                        <th>
-                            <a href="{{ route('teoriasAction', ['action' => 'delete', 'id' => $teoria->id]) }}">
-                                <i class="bx bx-trash"></i>
-                            </a>
-                        </th>
-
-                    </tr>
-                @endforeach
-            </table>
-        </article>
+        </div>
 
         @yield('formulario')
         {{-- <article>

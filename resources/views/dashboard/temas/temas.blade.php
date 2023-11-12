@@ -11,7 +11,6 @@
         </article>
     @endif
 
-    <a href="#formulario" class="abrir-formulario" id="abrir-btn">Agregar Temas</a>
 
     <section class="grid">
         <div id="formulario">
@@ -22,19 +21,31 @@
                 <a href="#" class="cerrar-formulario">
                     <i class="bx bx-x"></i>
                 </a>
-                <form method="GET" action="{{ route('temasAction', ['action' => 'create']) }}">
+                <form class="" method="GET" action="{{ route('temasAction', ['action' => 'create']) }}">
                     @csrf
-                    <!-- Campos del formulario para agregar una sección -->
-                    <label for="titulo_tema">Título del Tema</label>
-                    <input type="text" name="titulo_tema" id="titulo_tema">
-                    <select name="id_seccion">
-                        <option disabled selected selected> A que seccion pertenece? </option>
-                        @foreach ($secciones as $seccion)
-                            <option value="{{ $seccion->id }}">{{ $seccion->titulo_seccion }}</option>
-                        @endforeach
-                    </select>
-                    <!-- Agrega otros campos según sea necesario -->
-                    <button type="submit">Agregar</button>
+                    <!-- Campos del formulario para agregar un tema -->
+                    <div class="elementos">
+
+                        <div class="form__item">
+                            <label class="item__label" for="titulo_tema">Título del Tema</label>
+                            <br>
+                            <input class="item__input" type="text" name="titulo_tema" id="titulo_tema">
+                        </div>
+
+                        <div>
+                            <label class="item__label" for="id_seccion">A que seccion pertenece?</label>
+                            <select class="item__input" name="id_seccion" id="id_seccion">
+                                <option disabled selected selected> A que seccion pertenece? </option>
+                                @foreach ($secciones as $seccion)
+                                    <option value="{{ $seccion->id }}">{{ $seccion->titulo_seccion }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+                        <button class="button button__dashboard" type="submit">Agregar</button>
+                    </div>
+
                 </form>
             </article>
         </div>
@@ -42,39 +53,42 @@
         <section class="search-and-user">
             <h1>Herramientas | Temas</h1>
         </section>
-        <article>
-            <table>
-                <tr>
-                    <th>Titulo</th>
-                    <th>Secciones</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-                @foreach ($temas as $tema)
-                    <tr>
-                        <th>{{ $tema->titulo_tema }}</th>
-                        {{-- {{ dd($tema->id_seccion_fk) }} --}}
-                        <th>
-                            @if ($tema->id_seccion_fk !== null)
-                                {{ $tema->secciones->titulo_seccion }}
-                            @else
-                                No tiene una sección
-                            @endif
-                        </th>
-                        <th>
-                            <a href="{{ route('temasAction', ['action' => 'edit', 'id' => $tema->id]) }}">
-                                <i class="bx bx-edit-alt"></i>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="{{ route('temasAction', ['action' => 'delete', 'id' => $tema->id]) }}">
-                                <i class="bx bx-trash"></i>
-                            </a>
-                        </th>
-                    </tr>
-                @endforeach
-            </table>
-        </article>
+        <div>
+            <a href="#formulario" class="abrir-formulario" id="abrir-btn">Agregar Temas</a>
+            <article class="principal">
+                <table class="tabla_4">
+                    <thead>
+                        <th>Titulo</th>
+                        <th>Secciones</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </thead>
+                    @foreach ($temas as $tema)
+                        <tr>
+                            <th>{{ $tema->titulo_tema }}</th>
+                            {{-- {{ dd($tema->id_seccion_fk) }} --}}
+                            <th>
+                                @if ($tema->id_seccion_fk !== null)
+                                    {{ $tema->secciones->titulo_seccion }}
+                                @else
+                                    No tiene una sección
+                                @endif
+                            </th>
+                            <th>
+                                <a href="{{ route('temasAction', ['action' => 'edit', 'id' => $tema->id]) }}">
+                                    <i class="bx bx-edit-alt editar"></i>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{{ route('temasAction', ['action' => 'delete', 'id' => $tema->id]) }}">
+                                    <i class="bx bx-trash eliminar"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    @endforeach
+                </table>
+            </article>
+        </div>
 
         @yield('formulario')
         {{-- <article>
