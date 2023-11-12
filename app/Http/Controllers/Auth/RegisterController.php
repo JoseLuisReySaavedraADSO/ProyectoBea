@@ -128,6 +128,6 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         // Puedes pasar el array $tiposDocumento a la vista
-        return view('auth.register', ['tiposDocumento' => $this->tiposDocumento, 'departamentosColombia' => $this->departamentos]);
+        return view('auth.register', ['tiposDocumento' => $this->tiposDocumento, 'departamentos' => $this->departamentos]);
     }
 }

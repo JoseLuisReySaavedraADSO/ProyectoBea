@@ -74,7 +74,7 @@
                 <div>
                     <select id="regional" class="@error('regional') is-invalid @enderror item__input" name="regional" @if (!$errors->has('regional')) value=" {{ old('regional') }}" @endif>
                         <option value="" disabled selected>Selecciona una regional...</option>
-                        @foreach($departamentosColombia as $departamento)
+                        @foreach($departamentos as $departamento)
                         <option value="{{ $departamento }}">{{ $departamento }}</option>
                         @endforeach
                     </select>

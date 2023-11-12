@@ -43,11 +43,6 @@
 
             <article class="principal">
                 <table class="tabla_3">
-                    <colgroup>
-                        <col style="width:80%;">
-                        <col style="width: 10%;">
-                        <col style="width: 10%;">
-                    </colgroup>
                     <thead>
                         <th>Titulo</th>
                         <th>Editar</th>
