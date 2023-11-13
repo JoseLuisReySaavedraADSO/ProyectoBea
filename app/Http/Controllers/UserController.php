@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -36,7 +37,7 @@ class UserController extends Controller
     }
 
 
-    protected function validator(array $data)
+    protected function validator(array $data, $user = null)
     {
         $messages = [
             'regional.required' => 'Este campo es obligatorio.',
@@ -59,9 +60,9 @@ class UserController extends Controller
         return Validator::make($data, [
             'nombre' => ['nullable', 'string', 'max:250'],
             'telefono' => ['required', 'numeric', 'digits:10'],
-            'num_doc' => ['required', 'numeric', 'digits_between:6,10', 'unique:users'],
+            'num_doc' => ['required','numeric', 'digits_between:6,10',Rule::unique('users')->ignore($user ? $user->id : null)],
             'tipo_doc' => ['required', 'string', 'max:250'],
-            'correo_inst' => ['required', 'string', 'email', 'max:250', 'unique:users'],
+            'correo_inst' => ['required','string','email','max:250',Rule::unique('users')->ignore($user ? $user->id : null)],
             'correo_alt' => ['required', 'string', 'email', 'max:250'],
             'regional' => ['required', 'string', 'max:250'],
             'fecha_nac' => ['required', 'date'],
@@ -99,7 +100,6 @@ class UserController extends Controller
         $data = User::paginate(100);
         $fechaNac = Carbon::parse($userId->fecha_nac)->format('Y-m-d');
         $rol = Role::all();
-        // dd($fechaNac);
 
         $tiposDocumento = ['Cédula de Ciudadanía','Tarjeta de Identidad','Cédula de Extranjería','Número ciego SENA','Pasaporte','Documento Nacional de Identificación Pasaporte','Número de Identificación Tributaria','PEP - RAMV','PEP','Permiso por Protección Temporal',];
         $departamentos = ['Amazonas','Antioquia','Arauca','Atlántico','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada',];
@@ -109,9 +109,9 @@ class UserController extends Controller
     
     protected function update(Request $request, $id)
     {
-        // $this->validator($request->all())->validate();
-
         $user = User::findOrFail($id);
+
+        $this->validator($request->all(), $user)->validate();
 
         $user->id_rol_fk = $request->input('id_rol_fk');
         $user->nombre = $request->input('nombre');
@@ -140,9 +140,9 @@ class UserController extends Controller
 
     protected function profile(Request $request)
     {
-        // $this->validator($request->all())->validate();
-
         $user = Auth::user();
+
+        $this->validator($request->all(), $user)->validate();
 
         $user->nombre = $request->input('nombre');
         $user->telefono = $request->input('telefono');
