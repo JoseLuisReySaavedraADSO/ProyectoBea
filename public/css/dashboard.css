@@ -386,6 +386,7 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
 }
 
 th {
@@ -401,7 +402,6 @@ th {
 .tabla_3 th:nth-child(2),
 .tabla_3 td:nth-child(2) {
     width: 58%;
-    text-align: center;
 }
 
 .tabla_3 th:nth-child(3),
@@ -419,6 +419,7 @@ th {
 .tabla_4 th:nth-child(1),
 .tabla_4 td:nth-child(1) {
     width: 8%;
+    text-align: center;
 }
 
 .tabla_4 th:nth-child(2),

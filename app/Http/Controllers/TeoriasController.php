@@ -20,6 +20,8 @@ class TeoriasController extends Controller
   {
     switch ($action) {
       case 'create':
+        return $this->index($id);
+      case 'create':
         return $this->create(request());
       case 'edit':
         return $this->edit($id);
@@ -32,6 +34,13 @@ class TeoriasController extends Controller
       default:
         return response()->json(['error' => 'Acción no válida'], 400);
     }
+  }
+
+  public function index($id)
+  {
+    $teoria = TemaTeoriaPractica::findOrFail($id);
+
+    return view('logged/teorias', compact('teoria'));
   }
 
   public function visibilidad(Request $request, $id)
@@ -81,9 +90,9 @@ class TeoriasController extends Controller
         'id_tema' => 'required|exists:temas,id',
       ], [
         'titulo_teoria.required' => 'El campo de titulo es necesario',
-        'descripcion_teoria.required' => 'El campo de titulo es necesario',
+        'descripcion_teoria.required' => 'El campo descripcion es necesario',
         'titulo_teoria.max' => 'El titulo de la teoria supera los 250 caracteres',
-        'descripcion_teoria.max' => 'El titulo de la teoria supera los 250 caracteres',
+        'descripcion_teoria.max' => 'la descripcion de la teoria supera los 1000 caracteres',
         'imagen_teoria.dimensions' => 'Las dimensiones de la imagen no son válidas. El ancho máximo permitido es :max_width y la altura máxima permitida es :max_height.',
         'imagen_teoria.image' => 'El archivo seleccionado no es una imagen válida.',
         'imagen_teoria.required' => 'La imagen es necesaria',

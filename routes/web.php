@@ -22,10 +22,13 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
 // SECTIONS
 
 Route::get('/secciones', [App\Http\Controllers\SeccionesController::class, 'index'])->name('secciones');
 Route::get('/secciones/tema/{id}', [App\Http\Controllers\TemasController::class, 'index'])->name('temas');
+Route::get('/secciones/tema/teoria/{id}', [App\Http\Controllers\TeoriasController::class, 'index'])->name('teorias');
 
 // DASHBOARD
 
@@ -45,7 +48,6 @@ Route::post('/dashboard/temas/{action}/{id?}', [App\Http\Controllers\TemasContro
 
 Route::get('/dashboard/teorias/{action}/{id?}', [App\Http\Controllers\TeoriasController::class, '__invoke'])->name('teoriasAction')->middleware('checkUserRole');
 Route::post('/dashboard/teorias/{action}/{id?}', [App\Http\Controllers\TeoriasController::class, '__invoke'])->name('teoriasAction')->middleware('checkUserRole');
-// Route::post('/dashboard/teorias', [App\Http\Controllers\TeoriasController::class, 'create'])->name('teorias.create');
 
 // USUARIOS 
 
