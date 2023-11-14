@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Auth::routes();
@@ -34,10 +34,12 @@ Route::get('/dashboard/{action}', [App\Http\Controllers\DashboardController::cla
 // DASHBOARD | SECCIONES 
 
 Route::get('/dashboard/secciones/{action}/{id?}', [App\Http\Controllers\SeccionesController::class, '__invoke'])->name('seccionesAction')->middleware('checkUserRole');
+Route::post('/dashboard/secciones/{action}/{id?}', [App\Http\Controllers\SeccionesController::class, '__invoke'])->name('seccionesAction')->middleware('checkUserRole');
 
 // DASHBOARD | TEMAS 
 
 Route::get('/dashboard/temas/{action}/{id?}', [App\Http\Controllers\TemasController::class, '__invoke'])->name('temasAction')->middleware('checkUserRole');
+Route::post('/dashboard/temas/{action}/{id?}', [App\Http\Controllers\TemasController::class, '__invoke'])->name('temasAction')->middleware('checkUserRole');
 
 // TEORIAS
 

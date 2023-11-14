@@ -21,20 +21,37 @@ class SeccionesController extends Controller
         return $this->update(request(), $id);
       case 'delete':
         return $this->delete($id);
+      case 'visibilidad':
+        return $this->visibilidad(request(), $id);
       default:
         return response()->json(['error' => 'Acción no válida'], 400);
     }
   }
-  
+
   /**
    * Display a listing of the resource.
    */
-  public function index()
+
+  public function visibilidad(Request $request, $id)
   {
-    $secciones = Seccione::with('tema')->get();
-    return view('logged/sections', compact('secciones'));
+    $seccion = Seccione::findOrFail($id);
+
+    // Obtener el valor del checkbox (puede ser "on" o null)
+    $visibilidad = $request->input('visibilidad');
+
+    // Convertir el valor a un booleano
+    $seccion->visibilidad = $visibilidad === "on";
+
+    $seccion->save();
+
+    return redirect()->back();
   }
 
+  public function index()
+  {
+    $secciones = Seccione::where('visibilidad', true)->with('tema')->get();
+    return view('logged/sections', compact('secciones'));
+  }
 
   public function tema($id)
   {

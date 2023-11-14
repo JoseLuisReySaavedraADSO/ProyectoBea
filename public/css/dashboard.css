@@ -1,6 +1,6 @@
 :root {
     --colorPrincipal: #00b400;
-    --colorSecundario: #00324D;
+    --colorSecundario: #00324d;
     --colorTerceario: #f0f1f6;
     --blanco: #fff;
     --negro: #333;
@@ -52,7 +52,6 @@ svg {
 body {
     font: 16px/1.5 "Lato", sans-serif;
 }
-
 
 /* HEADER STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -117,7 +116,7 @@ body {
     margin-bottom: 20px;
 }
 
-.page-header .admin-menu li>* {
+.page-header .admin-menu li > * {
     width: 100%;
     padding: 12px 15px;
 }
@@ -166,7 +165,6 @@ body {
     color: var(--colorSecundario);
 }
 
-
 /* PAGE CONTENT STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page-content {
@@ -203,7 +201,6 @@ body {
 /* MQ RULES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (max-width: 767px) {
-
     .page-header,
     .page-content {
         position: static;
@@ -274,7 +271,6 @@ body {
     }
 }
 
-
 /* BODY CLASSES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .mob-menu-opened .toggle-mob-menu i {
@@ -292,7 +288,7 @@ body {
         width: 40px;
     }
 
-    .collapsed .page-header .admin-menu li>* {
+    .collapsed .page-header .admin-menu li > * {
         padding: 10px;
     }
 
@@ -325,7 +321,6 @@ body {
 .selected i {
     color: var(--colorSecundario);
 }
-
 
 /* Estilos para el artículo del formulario */
 #formulario {
@@ -383,7 +378,8 @@ thead th {
     text-align: center;
 }
 
-th, td {
+th,
+td {
     border: 3px solid var(--blanco);
     padding: 8px;
     text-align: left;
@@ -399,41 +395,97 @@ th {
 
 .tabla_3 th:nth-child(1),
 .tabla_3 td:nth-child(1) {
-    width: 75%;
+    width: 7%;
 }
 
 .tabla_3 th:nth-child(2),
 .tabla_3 td:nth-child(2) {
-    width: 10%;
+    width: 58%;
     text-align: center;
 }
 
 .tabla_3 th:nth-child(3),
 .tabla_3 td:nth-child(3) {
+    width: 10%;
+    text-align: center;
+}
+
+.tabla_3 th:nth-child(4),
+.tabla_3 td:nth-child(4) {
     width: 15%;
     text-align: center;
 }
 
 .tabla_4 th:nth-child(1),
 .tabla_4 td:nth-child(1) {
-    width: 38%;
+    width: 8%;
 }
 
 .tabla_4 th:nth-child(2),
 .tabla_4 td:nth-child(2) {
-    width: 38%;
+    width: 39%;
 }
 
 .tabla_4 th:nth-child(3),
 .tabla_4 td:nth-child(3) {
-    width: 10%;
-    text-align: center;
+    width: 30%;
 }
 
 .tabla_4 th:nth-child(4),
 .tabla_4 td:nth-child(4) {
-    width: 14%;
+    width: 10%;
     text-align: center;
+}
+
+.tabla_4 th:nth-child(5),
+.tabla_4 td:nth-child(5) {
+    width: 15%;
+    text-align: center;
+}
+
+/* Estilos para pantallas más pequeñas */
+@media screen and (max-width: 767px) {
+    .tabla_3 th:nth-child(1),
+    .tabla_3 td:nth-child(1) {
+        width: 22%;
+    }
+
+    .tabla_3 th:nth-child(2),
+    .tabla_3 td:nth-child(2) {
+        width: 54%;
+        text-align: center;
+    }
+
+    .tabla_3 th:nth-child(3),
+    .tabla_3 td:nth-child(3),
+    .tabla_3 th:nth-child(4),
+    .tabla_3 td:nth-child(4) {
+        width: 12%;
+        text-align: center;
+    }
+
+    .tabla_4 th:nth-child(1),
+    .tabla_4 td:nth-child(1) {
+        width: 22%;
+    }
+
+    .tabla_4 th:nth-child(2),
+    .tabla_4 td:nth-child(2) {
+        width: 54%;
+    }
+
+    .tabla_4 th:nth-child(3),
+    .tabla_4 td:nth-child(3) {
+        width: 0%;
+    }
+
+    .tabla_4 th:nth-child(4),
+    .tabla_4 td:nth-child(4),
+    .tabla_4 th:nth-child(5),
+    .tabla_4 td:nth-child(5) {
+        width: 12%;
+        text-align: center;
+    }
 }
 
 .editar {
@@ -442,4 +494,69 @@ th {
 
 .eliminar {
     color: var(--rojo);
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: var(--colorPrincipal);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--colorPrincipal);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

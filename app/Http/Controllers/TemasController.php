@@ -21,6 +21,8 @@ class TemasController extends Controller
         return $this->update(request(), $id);
       case 'delete':
         return $this->delete($id);
+      case 'visibilidad':
+        return $this->visibilidad(request(), $id);
       default:
         return response()->json(['error' => 'Acción no válida'], 400);
     }
@@ -28,16 +30,30 @@ class TemasController extends Controller
   /**
    * Display a listing of the resource.
    */
+
+  public function visibilidad(Request $request, $id)
+  {
+    $tema = Tema::findOrFail($id);
+
+    // Obtener el valor del checkbox (puede ser "on" o null)
+    $visibilidad = $request->input('visibilidad');
+
+    // Convertir el valor a un booleano
+    $tema->visibilidad = $visibilidad === "on";
+
+    $tema->save();
+
+    return redirect()->back();
+  }
+
   public function index($id)
   {
     $temas = Tema::findOrFail($id);
-    // $contenido = TemaTeoriaPractica::where('id_tema_fk', $id)->get();
+
     $contenido = TemaTeoriaPractica::with('teoria', 'imagen', 'practica')
       ->where('id_tema_fk', $id)
       ->get();
 
-    // $contenido = $temas::with('TemaTeoriaPractica')->get(); 
-    // dd($contenido);
     return view('logged/temas', compact('contenido', 'temas'));
   }
 
