@@ -133,5 +133,21 @@ class DatabaseSeeder extends Seeder
       'centro_form' => 'Centro Industrial de Mantenimiento Integral',
       'password' => '$2y$10$Q5x3zLabszTlwIXIolIBkuALFxT8bpPdrSWMQSWj5ivmFLIhKPUV2',
     ]);
+
+    $fechaNacimiento = '2005-04-15'; 
+
+    \App\Models\User::factory()->create([
+      'id_rol_fk' => '1',
+      'nombre' => 'Zulay Ortegon',
+      'telefono' => '3175300440',
+      'num_doc' => '1095300976',
+      'tipo_doc' => 'Cédula de ciudadanía',
+      'correo_inst' => 'znortegon@soy.sena.edu.co',
+      'correo_alt' => 'zulyortegon15@gmail.com',
+      'regional' => 'Santander',
+      'fecha_nac' => $fechaNacimiento,
+      'centro_form' => 'Centro Industrial de Mantenimiento Integral',
+      'password' => '$2y$10$jwi49y7kfCS6vsBQftTDhuJZSnnJSCvZKwhg0pHyJkSaPQpRdLZMC',
+    ]);
   }
 }

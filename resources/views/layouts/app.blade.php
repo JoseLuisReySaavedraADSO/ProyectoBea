@@ -51,6 +51,7 @@
                 @if (auth()->user()->id_rol_fk === 1)
                     <a href="{{ route('dashboardAction', ['action' => 'secciones']) }}">Dashboard</a>
                 @endif
+                <a href="{{ route('view', ['view' => 'profile.user']) }}">{{ __('Perfil') }}</a>
 
                 <a href="{{ route('secciones') }}">{{ __('Secciones') }}</a>
 
