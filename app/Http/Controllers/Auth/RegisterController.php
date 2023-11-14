@@ -75,14 +75,14 @@ class RegisterController extends Controller
         $fechaHace100Anios = Carbon::now()->subYears(100);
 
         return Validator::make($data, [
-            'nombre' => ['nullable', 'string', 'max:250', 'regex:/^[a-zA-Z]+$/'],
+            'nombre' => ['nullable', 'string', 'max:250', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/'],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'num_doc' => ['required', 'numeric', 'digits_between:6,10', 'unique:users'],
             'tipo_doc' => ['required', 'string', 'max:250'],
             'correo_inst' => ['required', 'string', 'email', 'max:250', 'unique:users'],
             'correo_alt' => ['required', 'string', 'email', 'max:250'],
             'regional' => ['required', 'string', 'max:250'],
-            'centro_form' => ['required', 'string', 'max:250', 'regex:/^[a-zA-Z]+$/'],
+            'centro_form' => ['required', 'string', 'max:250', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/'],
             'fecha_nac' => [
                 'required',
                 'date',
