@@ -19,7 +19,7 @@ class TeoriasController extends Controller
   public function __invoke($action, $id = null)
   {
     switch ($action) {
-      case 'create':
+      case 'index':
         return $this->index($id);
       case 'create':
         return $this->create(request());

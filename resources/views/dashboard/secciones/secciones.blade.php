@@ -5,7 +5,8 @@ $Url = $_SERVER['REQUEST_URI'];
 @endphp
 @section('content')
 @if (session('success'))
-<article style="background-color: rgb(126, 245, 126)">
+<article class="succes-alert">
+  <i class='bx bx-info-circle'></i>
   {{ session('success') }}
 </article>
 @endif

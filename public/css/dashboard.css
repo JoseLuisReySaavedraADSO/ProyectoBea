@@ -522,7 +522,7 @@ th {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: var(--colorTerceario);
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
@@ -534,7 +534,7 @@ th {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: var(--blanco);
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
@@ -560,4 +560,12 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+.succes-alert {
+    background-color: var(--colorPrincipal);
+    padding: 5px 5px 5px 20px;
+    color: var(--blanco);
+    border-radius: 25px;
+    margin-bottom: 30px;
 }
