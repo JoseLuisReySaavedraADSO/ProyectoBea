@@ -78,7 +78,7 @@
                     </form>
                 </li>
                 <div class="switch">
-                    <input type="checkbox" id="mode" checked>
+                    <input type="menu" id="mode" checked>
                     <label for="mode">
                     </label>
                 </div>

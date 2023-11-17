@@ -21,9 +21,9 @@ class Seccione extends Model
     return $this->hasMany(Tema::class, 'id_seccion_fk', 'id');
   }
 
-  public function usuariosSecciones()
+  public function users()
   {
-    return $this->hasMany(UsuarioSeccion::class, 'id_seccion_fk', 'id');
+      return $this->belongsToMany(User::class, 'tb_usuarios_secciones', 'id_seccion_fk', 'id_usuario_fk');
   }
 
   public function temateoriapractica()
@@ -31,3 +31,8 @@ class Seccione extends Model
     return $this->hasOne(TemaTeoriaPractica::class, 'id_seccion_fk', 'id');
   }
 }
+
+
+// if ($vistas) {
+//   $user->secciones()->attach($vistas);
+// }
