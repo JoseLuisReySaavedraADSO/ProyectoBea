@@ -7,7 +7,8 @@ $Url = $_SERVER['REQUEST_URI'];
 
 @section('content')
 @if (session('success'))
-<article style="background-color: rgb(126, 245, 126)">
+<article class="succes-alert">
+  <i class='bx bx-info-circle'></i>
   {{ session('success') }}
 </article>
 @endif
@@ -100,6 +101,7 @@ $Url = $_SERVER['REQUEST_URI'];
     <article class="principal">
       <table class="tabla_4">
         <thead>
+          <th>Visibilidad</th>
           <th>Titulo</th>
           <th>Tema</th>
           <th>Editar</th>
@@ -107,6 +109,26 @@ $Url = $_SERVER['REQUEST_URI'];
         </thead>
         @foreach ($teorias as $teoria)
         <tr>
+          <th>
+            <div class="toggle-container">
+              <form id="visibilidadForm_{{ $teoria->id }}" method="POST" action="{{ route('teoriasAction', ['action' => 'visibilidad', 'id' => $teoria->id]) }}">
+                @csrf
+                <div class="toggle-container">
+                  <label class="switch">
+                    <input id="visibilidadCheckbox_{{ $teoria->id }}" type="checkbox" name="visibilidad" {{$teoria->visibilidad ? 'checked' : ''}}>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <button type="submit" style="display: none;"></button>
+              </form>
+
+              <script>
+                document.getElementById('visibilidadCheckbox_{{ $teoria->id }}').addEventListener('change', function() {
+                  document.getElementById('visibilidadForm_{{ $teoria->id }}').submit();
+                });
+              </script>
+            </div>
+          </th>
           <th>{{ $teoria->teoria->titulo_teoria }}</th>
           {{-- {{ dd($tema->id_seccion_fk) }} --}}
           <th>

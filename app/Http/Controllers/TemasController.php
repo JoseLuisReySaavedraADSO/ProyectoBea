@@ -52,6 +52,7 @@ class TemasController extends Controller
 
     $contenido = TemaTeoriaPractica::with('teoria', 'imagen', 'practica')
       ->where('id_tema_fk', $id)
+      ->where('visibilidad', true)
       ->get();
 
     return view('logged/temas', compact('contenido', 'temas'));
