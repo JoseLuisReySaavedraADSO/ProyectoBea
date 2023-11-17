@@ -42,7 +42,7 @@
     
         <tr>
           <th scope="row">Correo Institucional</th>
-          <td> {{ Auth::user()->correo_inst }} </td>
+          <td> {{ Auth::user()->email }} </td>
         </tr>
     
         <tr>

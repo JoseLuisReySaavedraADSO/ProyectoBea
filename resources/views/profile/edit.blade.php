@@ -97,9 +97,9 @@
               <th scope="row">Correo Institucional</th>
               <td> 
                 <div class="col-md-6">
-                    <input id="correo_inst" type="email" class="form-control @error('correo_inst') is-invalid @enderror" name="correo_inst" value="{{ Auth::user()->correo_inst }}" required autocomplete="correo_inst">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}" required autocomplete="email">
 
-                    @error('correo_inst')
+                    @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

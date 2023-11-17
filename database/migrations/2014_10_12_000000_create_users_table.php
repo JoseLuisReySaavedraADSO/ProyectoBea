@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('telefono', 250)->nullable();
             $table->string('num_doc', 250)->unique();
             $table->string('tipo_doc', 250);
-            $table->string('correo_inst', 250)->unique();
+            $table->string('email', 250)->unique();
             $table->string('correo_alt', 250);
             $table->string('regional', 250);
             $table->date('fecha_nac');

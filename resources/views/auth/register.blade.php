@@ -51,10 +51,10 @@
 
         <div>
             <div class="form__item">
-                <label class="item__label" for="correo_inst">{{ __('Correo SENA') }}</label>
+                <label class="item__label" for="email">{{ __('Correo SENA') }}</label>
 
                 <div>
-                    <input placeholder="@error('correo_inst') {{$message}} @enderror" id="correo_inst" type="email" class="@error('correo_inst') is-invalid @enderror item__input" name="correo_inst" required autocomplete="correo_inst" @if (!$errors->has('correo_inst')) value=" {{ old('correo_inst') }}" @endif>
+                    <input placeholder="@error('email') {{$message}} @enderror" id="email" type="email" class="@error('email') is-invalid @enderror item__input" name="email" required autocomplete="email" @if (!$errors->has('email')) value=" {{ old('email') }}" @endif>
                 </div>
             </div>
 

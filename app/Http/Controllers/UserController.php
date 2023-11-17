@@ -50,8 +50,8 @@ class UserController extends Controller
             'num_doc.digits_between' => 'El campo número de documento debe tener entre 6 y 10 dígitos.',
             'num_doc.unique' => 'Ya tienes asociado este documento con otro usuario.',
             'tipo_doc.required' => 'Este campo es obligatorio.',
-            'correo_inst.required' => 'Este campo es obligatorio.',
-            'correo_inst.unique' => 'Ya tienes asociado este correo con otro usuario.',
+            'email.required' => 'Este campo es obligatorio.',
+            'email.unique' => 'Ya tienes asociado este correo con otro usuario.',
             'correo_alt.required' => 'Este campo es obligatorio.',
             'regional.required' => 'Este campo es obligatorio.',
             'fecha_nac.required' => 'Este campo es obligatorio.',
@@ -63,7 +63,7 @@ class UserController extends Controller
             'telefono' => ['required', 'numeric', 'digits:10'],
             'num_doc' => ['required','numeric', 'digits_between:6,10',Rule::unique('users')->ignore($user ? $user->id : null)],
             'tipo_doc' => ['required', 'string', 'max:250'],
-            'correo_inst' => ['required','string','email','max:250',Rule::unique('users')->ignore($user ? $user->id : null)],
+            'email' => ['required','string','email','max:250',Rule::unique('users')->ignore($user ? $user->id : null)],
             'correo_alt' => ['required', 'string', 'email', 'max:250'],
             'regional' => ['required', 'string', 'max:250'],
             'fecha_nac' => ['required', 'date'],
@@ -83,7 +83,7 @@ class UserController extends Controller
             'telefono' => $data['telefono'],
             'num_doc' => $data['num_doc'],
             'tipo_doc' => $data['tipo_doc'],
-            'correo_inst' => $data['correo_inst'],
+            'email' => $data['email'],
             'correo_alt' => $data['correo_alt'],
             'regional' => $data['regional'],
             'fecha_nac' => $data['fecha_nac'],
@@ -121,7 +121,7 @@ class UserController extends Controller
         $user->telefono = $request->input('telefono');
         $user->num_doc = $request->input('num_doc');
         $user->tipo_doc = $request->input('tipo_doc');
-        $user->correo_inst = $request->input('correo_inst');
+        $user->email = $request->input('email');
         $user->correo_alt = $request->input('correo_alt');
         $user->regional = $request->input('regional');
         $user->fecha_nac = $request->input('fecha_nac');
@@ -151,7 +151,7 @@ class UserController extends Controller
         $user->telefono = $request->input('telefono');
         $user->num_doc = $request->input('num_doc');
         $user->tipo_doc = $request->input('tipo_doc');
-        $user->correo_inst = $request->input('correo_inst');
+        $user->email = $request->input('email');
         $user->correo_alt = $request->input('correo_alt');
         $user->regional = $request->input('regional');
         $user->fecha_nac = $request->input('fecha_nac');
