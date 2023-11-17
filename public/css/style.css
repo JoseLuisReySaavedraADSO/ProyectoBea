@@ -18,6 +18,13 @@
     --rojo: #ec1848;
 }
 
+.container {
+    margin: auto;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+
+}
 /* 
     VISTA WELCOME
 */
@@ -586,6 +593,10 @@
     object-fit: contain; /* Controla cómo el elemento <embed> se ajusta al contenedor */
 }
 
+.mobile-button {
+    display: none;
+}
+
 .contenido__teoria p {
     width: 100%;
     box-sizing: border-box;
@@ -597,15 +608,21 @@
         height: auto; /* Permitir que la altura se ajuste automáticamente */
     }
 
-    .contenido__teoria > div {
-        flex-basis: 100%; /* Ocupar todo el ancho */
+    .pdf__teoria {
+        display: none; /* Oculta el contenedor del PDF */
     }
 
-    .pdf__teoria {
-        max-height: none; /* Eliminar la altura máxima en dispositivos pequeños */
-        margin-top: 20px; /* Añadir margen superior entre la imagen y el PDF */
+    .pdf {
+        width: 290px;
+    }
+
+    .mobile-button {
+        display: block; /* Muestra el botón en dispositivos móviles */
+        text-align: center;
+        margin-top: 20px; /* Ajusta según sea necesario */
     }
 }
+
 
 /* MENU DASHBOARD */
 

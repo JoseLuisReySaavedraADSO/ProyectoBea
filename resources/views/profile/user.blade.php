@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 @section('content')
 
-<div class="container p-5">
-    <table class="table text-center border">
+<div>
+    <table class="container">
       <thead>
         <tr>
           <th scope="col"> Nombre del dato</th>

@@ -1,9 +1,10 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 @section('content')
 
-<div class="container p-5">
-    <table class="table">
+<div>
+    <table class="container">
       
     <form action="{{ route('userAction', ['action' => 'profile' ]) }}" method="get">
       @csrf
