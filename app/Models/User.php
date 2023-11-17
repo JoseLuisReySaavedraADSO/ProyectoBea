@@ -66,8 +66,9 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'id', 'id_rol_fk');
     }
 
-    public function usuariosSecciones()
+    public function secciones()
     {
-        return $this->hasMany(UsuarioSeccion::class, 'id_usuario_fk', 'id');
+        return $this->belongsToMany(Seccione::class, 'tb_usuarios_secciones', 'id_usuario_fk', 'id_seccion_fk');
     }
+    
 }

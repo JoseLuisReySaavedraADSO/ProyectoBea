@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Seccione;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -58,7 +59,7 @@ class UserController extends Controller
         ];
 
         return Validator::make($data, [
-            'nombre' => ['nullable', 'string', 'max:250'],
+            'nombre' => ['string', 'max:250'],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'num_doc' => ['required','numeric', 'digits_between:6,10',Rule::unique('users')->ignore($user ? $user->id : null)],
             'tipo_doc' => ['required', 'string', 'max:250'],
@@ -74,10 +75,9 @@ class UserController extends Controller
     {
         $this->validator($data)->validate();
 
-        $data['id_rol_fk'] = 2;
         $data['password'] = $data['num_doc'];
-        
-        User::create([
+
+        $user = User::create([
             'id_rol_fk' => $data['id_rol_fk'],
             'nombre' => $data['nombre'],
             'telefono' => $data['telefono'],
@@ -91,6 +91,8 @@ class UserController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
+        $user->secciones()->sync($data['vistas']);
+        
         return redirect()->route('view', ['view' => 'dashboard.users.view'])->with('success', 'Usuario creado exitosamente.');
     }
 
