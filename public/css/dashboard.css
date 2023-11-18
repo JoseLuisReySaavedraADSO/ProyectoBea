@@ -1,3 +1,4 @@
+/* Definición de variables de color en el root */
 :root {
     --colorPrincipal: #00b400;
     --colorSecundario: #00324d;
@@ -6,13 +7,14 @@
     --negro: #333;
     --rojo: #ec1848;
 }
-
+/* Estilos globales y reset */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
+/* Lista sin estilos y estilos comunes para enlaces y botones */
 ul {
     list-style: none;
 }
@@ -31,27 +33,34 @@ button {
     cursor: pointer;
 }
 
+/* Estilos para el menú de tipo checkbox */
 .menu[type="checkbox"] {
     position: absolute;
     left: -9999px;
 }
 
+/* Estilos para la etiqueta (label) */
 label {
     cursor: pointer;
 }
 
+/* Reset de estilos para botones e input */
 button,
 input {
     border: none;
 }
 
+/* Estilos para imágenes SVG */
 svg {
     display: block;
 }
 
+/* Estilos generales para el cuerpo de la página */
 body {
     font: 16px/1.5 "Lato", sans-serif;
 }
+
+/* Estilos para la barra de encabezado (header) */
 
 /* HEADER STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -165,6 +174,7 @@ body {
     color: var(--colorSecundario);
 }
 
+/* Estilos para el contenido de la página */
 /* PAGE CONTENT STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page-content {
@@ -198,9 +208,9 @@ body {
     box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.075);
 }
 
-/* MQ RULES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Media query para pantallas pequeñas */
 @media screen and (max-width: 767px) {
+    /* ... (ajustes de estilos para pantallas pequeñas) ... */
     .page-header,
     .page-content {
         position: static;
@@ -377,6 +387,7 @@ body {
     display: none;
 }
 
+/* Estilos para la tabla y sus columnas en diferentes tamaños de pantalla */
 table {
     width: 100%;
     max-width: 1030px;
