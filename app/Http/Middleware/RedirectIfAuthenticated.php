@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RedirectIfAuthenticated
 {
     /**
-     * Handle an incoming request.
+     * Maneja una solicitud entrante.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
@@ -20,11 +20,14 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+            // Verifica si el usuario está autenticado en el guard especificado
             if (Auth::guard($guard)->check()) {
+                // Redirige al inicio del RouteServiceProvider si el usuario está autenticado
                 return redirect(RouteServiceProvider::HOME);
             }
         }
 
+        // Continúa con la solicitud si el usuario no está autenticado
         return $next($request);
     }
 }

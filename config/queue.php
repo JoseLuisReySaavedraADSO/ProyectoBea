@@ -4,12 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Queue Connection Name
+    | Nombre Predeterminado de la Conexión de Cola
     |--------------------------------------------------------------------------
     |
-    | Laravel's queue API supports an assortment of back-ends via a single
-    | API, giving you convenient access to each back-end using the same
-    | syntax for every one. Here you may define a default connection.
+    | La API de colas de Laravel admite una variedad de back-ends a través de una
+    | sola API, dándote acceso conveniente a cada back-end utilizando la misma
+    | sintaxis para cada uno. Aquí puedes definir una conexión predeterminada.
     |
     */
 
@@ -17,12 +17,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Queue Connections
+    | Conexiones de Cola
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the connection information for each server that
-    | is used by your application. A default configuration has been added
-    | for each back-end shipped with Laravel. You are free to add more.
+    | Aquí puedes configurar la información de conexión para cada servidor que
+    | es utilizado por tu aplicación. Se ha agregado una configuración predeterminada
+    | para cada back-end incluido con Laravel. Eres libre de agregar más.
     |
     | Drivers: "sync", "database", "beanstalkd", "sqs", "redis", "null"
     |
@@ -75,12 +75,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Job Batching
+    | Agrupación de Trabajos (Job Batching)
     |--------------------------------------------------------------------------
     |
-    | The following options configure the database and table that store job
-    | batching information. These options can be updated to any database
-    | connection and table which has been defined by your application.
+    | Las siguientes opciones configuran la base de datos y la tabla que almacenan
+    | la información de agrupación de trabajos. Estas opciones pueden actualizarse
+    | a cualquier conexión de base de datos y tabla definidas por tu aplicación.
     |
     */
 
@@ -91,12 +91,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Failed Queue Jobs
+    | Trabajos de Cola Fallidos
     |--------------------------------------------------------------------------
     |
-    | These options configure the behavior of failed queue job logging so you
-    | can control which database and table are used to store the jobs that
-    | have failed. You may change them to any database / table you wish.
+    | Estas opciones configuran el comportamiento del registro de trabajos de cola
+    | fallidos para que puedas controlar qué base de datos y tabla se utilizan
+    | para almacenar los trabajos que han fallado. Puedes cambiarlos a cualquier
+    | base de datos / tabla que desees.
     |
     */
 

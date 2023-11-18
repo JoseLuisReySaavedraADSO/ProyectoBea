@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  protected $fillable = [
-    'id',
-    'nom_rol',
-    'created_at',
-    'updated_at',
-  ];
+    /**
+     * Los atributos que son asignables.
+     *
+     * @var array<string>
+     */
+    protected $fillable = [
+        'id',
+        'nom_rol',
+        'created_at',
+        'updated_at',
+    ];
 }

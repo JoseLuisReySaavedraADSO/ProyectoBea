@@ -4,12 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Filesystem Disk
+    | Disco de Sistema de Archivos Predeterminado
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default filesystem disk that should be used
-    | by the framework. The "local" disk, as well as a variety of cloud
-    | based disks are available to your application. Just store away!
+    | Aquí puedes especificar el disco de sistema de archivos predeterminado que debería ser utilizado
+    | por el framework. El disco "local", así como una variedad de discos basados en la nube,
+    | están disponibles para tu aplicación. ¡Solo almacena!
     |
     */
 
@@ -17,14 +17,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Filesystem Disks
+    | Discos de Sistema de Archivos
     |--------------------------------------------------------------------------
     |
-    | Here you may configure as many filesystem "disks" as you wish, and you
-    | may even configure multiple disks of the same driver. Defaults have
-    | been set up for each driver as an example of the required values.
+    | Aquí puedes configurar tantos "discos" de sistema de archivos como desees, e incluso puedes
+    | configurar varios discos del mismo controlador. Los valores predeterminados se han
+    | establecido para cada controlador como un ejemplo de los valores requeridos.
     |
-    | Supported Drivers: "local", "ftp", "sftp", "s3"
+    | Controladores Soportados: "local", "ftp", "sftp", "s3"
     |
     */
 
@@ -60,12 +60,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Symbolic Links
+    | Enlaces Simbólicos
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
-    | the locations of the links and the values should be their targets.
+    | Aquí puedes configurar los enlaces simbólicos que se crearán cuando el
+    | comando Artisan `storage:link` sea ejecutado. Las claves del array deben ser
+    | las ubicaciones de los enlaces y los valores deben ser sus destinos.
     |
     */
 

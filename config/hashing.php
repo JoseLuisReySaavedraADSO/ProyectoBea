@@ -4,14 +4,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Hash Driver
+    | Controlador de Hash Predeterminado
     |--------------------------------------------------------------------------
     |
-    | This option controls the default hash driver that will be used to hash
-    | passwords for your application. By default, the bcrypt algorithm is
-    | used; however, you remain free to modify this option if you wish.
+    | Esta opción controla el controlador de hash predeterminado que se utilizará para el hash
+    | de contraseñas para tu aplicación. Por defecto, se utiliza el algoritmo bcrypt;
+    | sin embargo, puedes modificar esta opción si lo deseas.
     |
-    | Supported: "bcrypt", "argon", "argon2id"
+    | Soportados: "bcrypt", "argon", "argon2id"
     |
     */
 
@@ -19,12 +19,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Bcrypt Options
+    | Opciones de Bcrypt
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the configuration options that should be used when
-    | passwords are hashed using the Bcrypt algorithm. This will allow you
-    | to control the amount of time it takes to hash the given password.
+    | Aquí puedes especificar las opciones de configuración que se deben utilizar cuando
+    | las contraseñas se hashan utilizando el algoritmo Bcrypt. Esto te permitirá
+    | controlar la cantidad de tiempo que tarda en hashearse la contraseña dada.
     |
     */
 
@@ -34,12 +34,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Argon Options
+    | Opciones de Argon
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the configuration options that should be used when
-    | passwords are hashed using the Argon algorithm. These will allow you
-    | to control the amount of time it takes to hash the given password.
+    | Aquí puedes especificar las opciones de configuración que se deben utilizar cuando
+    | las contraseñas se hashan utilizando el algoritmo Argon. Esto te permitirá
+    | controlar la cantidad de tiempo que tarda en hashearse la contraseña dada.
     |
     */
 
