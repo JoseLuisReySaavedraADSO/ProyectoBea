@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Seccione;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -43,13 +44,14 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    protected $tiposDocumento = ['Cédula de Ciudadanía','Tarjeta de Identidad','Cédula de Extranjería','Número ciego SENA','Pasaporte','Documento Nacional de Identificación Pasaporte','Número de Identificación Tributaria','PEP - RAMV','PEP','Permiso por Protección Temporal',
+    protected $tiposDocumento = [
+        'Cédula de Ciudadanía', 'Tarjeta de Identidad', 'Cédula de Extranjería', 'Número ciego SENA', 'Pasaporte', 'Documento Nacional de Identificación Pasaporte', 'Número de Identificación Tributaria', 'PEP - RAMV', 'PEP', 'Permiso por Protección Temporal',
     ];
 
     protected $departamentos = [
-        'Amazonas','Antioquia','Arauca','Atlántico','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada',
+        'Amazonas', 'Antioquia', 'Arauca', 'Atlántico', 'Bolívar', 'Boyacá', 'Caldas', 'Caquetá', 'Casanare', 'Cauca', 'Cesar', 'Chocó', 'Córdoba', 'Cundinamarca', 'Guainía', 'Guaviare', 'Huila', 'La Guajira', 'Magdalena', 'Meta', 'Nariño', 'Norte de Santander', 'Putumayo', 'Quindío', 'Risaralda', 'San Andrés y Providencia', 'Santander', 'Sucre', 'Tolima', 'Valle del Cauca', 'Vaupés', 'Vichada',
     ];
-    
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -98,13 +100,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
     protected function create(array $data)
     {
         $data['id_rol_fk'] = 2;
         $data['password'] = $data['num_doc'];
         $token = Str::random(10);
 
-        return User::create([
+        $user = User::create([
             'id_rol_fk' => $data['id_rol_fk'],
             'nombre' => $data['nombre'],
             'telefono' => $data['telefono'],
@@ -118,6 +121,12 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'remember_token' => $token,
         ]);
+
+        // Asigna automáticamente todas las secciones al usuario
+        $secciones = Seccione::all();
+        $user->secciones()->attach($secciones);
+
+        return $user;
     }
 
     /**

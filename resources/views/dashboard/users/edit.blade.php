@@ -8,6 +8,7 @@ $Url = $_SERVER['REQUEST_URI'];
 <section class="search-and-user">
   <h1>Editar | Usuarios</h1>
 </section>
+
 <section class="grid">
   <article>
 
@@ -145,8 +146,36 @@ $Url = $_SERVER['REQUEST_URI'];
 
       </div>
 
+      <div>
+          <div class="form__item">
+              <label class="item__label" for="vistas">{{ __('Administrar vistas secciones') }}</label>
+
+              <!-- <div>
+                  @foreach ($seccion as $item)
+                      <div>
+                          <input type="checkbox" class="@error('vistas') is-invalid @enderror"
+                              name="vistas[]" value="{{ $item->id }}">
+                          <label>{{ $item->titulo_seccion }}</label>
+                      </div>
+                  @endforeach
+              </div> -->
+
+              <div>
+                  @foreach ($seccion as $item)
+                      <div>
+                          <input type="checkbox" class="@error('vistas') is-invalid @enderror"
+                                name="vistas[]" value="{{ $item->id }}"
+                                {{ in_array($item->id, $usuarioSecciones) ? 'checked' : '' }}>
+                          <label> {{ $item->titulo_seccion }} </label>
+                      </div>
+                  @endforeach
+              </div>
+
+          </div>
+      </div>
 
       <button class="button button__dashboard" type="submit">Agregar</button>
+
     </form>
   </article>
 </section>
