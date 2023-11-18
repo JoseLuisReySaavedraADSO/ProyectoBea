@@ -322,6 +322,19 @@ body {
     color: var(--colorSecundario);
 }
 
+.error__validacion {
+    background-color: var(--rojo);
+    color: var(--blanco);
+    padding: 5px 5px 5px 20px;
+    border-radius: 25px;
+    margin-bottom: 30px;;
+}
+
+.error__validacion i {
+    margin-right: 10px;
+}
+
+
 /* Estilos para el artículo del formulario */
 #formulario {
     display: none; /* Inicialmente oculto */
@@ -522,7 +535,7 @@ th {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--colorTerceario);
+    background-color: var(--blanco);
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
@@ -534,7 +547,7 @@ th {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: var(--blanco);
+    background-color: var(--colorTerceario);
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }

@@ -13,10 +13,10 @@ $Url = $_SERVER['REQUEST_URI'];
 </article>
 @endif
 @if ($errors->any())
-<article style="background-color: rgb(255, 60, 0)">
+<article class="error__validacion">
   <ul>
     @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
+    <li><i class='bx bxs-error'></i>{{ $error }}</li>
     @endforeach
   </ul>
 </article>
@@ -93,7 +93,7 @@ $Url = $_SERVER['REQUEST_URI'];
   </div>
 
   <section class="search-and-user">
-    <h1>Herramientas | Temas</h1>
+    <h1>Herramientas | Teorias</h1>
   </section>
   <div>
     <a href="#formulario" class="abrir-formulario" id="abrir-btn">Agregar Teorias</a>
