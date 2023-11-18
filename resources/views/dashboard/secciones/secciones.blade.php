@@ -4,12 +4,8 @@
 $Url = $_SERVER['REQUEST_URI'];
 @endphp
 @section('content')
-@if (session('success'))
-<article class="succes-alert">
-  <i class='bx bx-info-circle'></i>
-  {{ session('success') }}
-</article>
-@endif
+
+@include('alerts')
 
 <section class="grid">
   <div id="formulario">
