@@ -6,4 +6,5 @@ return [
     'sent' => 'El correo electrónico para restablecer su contraseña ha sido enviado',
     'token' => 'Este token de restablecimiento de contraseña no es válido.',
     'user' => 'No podemos encontrar un usuario con esa dirección de correo electrónico.',
+    'throttled' => 'Demasiados intentos. Por favor, espere antes de volver a intentarlo.',
 ];
