@@ -27,9 +27,9 @@ Route::get('/home', [App\Http\Controllers\SeccionesController::class, 'index'])-
 
 // SECTIONS
 
-Route::get('/secciones', [App\Http\Controllers\SeccionesController::class, 'index'])->name('secciones');
-Route::get('/secciones/tema/{id}', [App\Http\Controllers\TemasController::class, 'index'])->name('temas');
-Route::get('/secciones/tema/teoria/{id}', [App\Http\Controllers\TeoriasController::class, 'index'])->name('teorias');
+Route::get('/secciones', [App\Http\Controllers\SeccionesController::class, 'index'])->name('secciones')->middleware('auth');
+Route::get('/secciones/tema/{id}', [App\Http\Controllers\TemasController::class, 'index'])->name('temas')->middleware('auth');
+Route::get('/secciones/tema/teoria/{id}', [App\Http\Controllers\TeoriasController::class, 'index'])->name('teorias')->middleware('auth');
 
 // DASHBOARD
 

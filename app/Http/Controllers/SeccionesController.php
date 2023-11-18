@@ -2,154 +2,201 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Seccione;
 use App\Models\Tema;
 use App\Models\TemaTeoriaPractica;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class SeccionesController extends Controller
 {
-  public function __invoke($action, $id = null)
-  {
-    switch ($action) {
-      case 'create':
-        return $this->create(request());
-      case 'edit':
-        return $this->edit($id);
-      case 'update':
-        return $this->update(request(), $id);
-      case 'delete':
-        return $this->delete($id);
-      case 'visibilidad':
-        return $this->visibilidad(request(), $id);
-      default:
-        return response()->json(['error' => 'Acción no válida'], 400);
+    /**
+     * Invoca la acción correspondiente según la solicitud.
+     *
+     * @param string $action La acción a realizar.
+     * @param int|null $id El ID de la sección (opcional).
+     *
+     * @return mixed Retorna el resultado de la acción.
+     */
+    public function __invoke($action, $id = null)
+    {
+        switch ($action) {
+            case 'create':
+                return $this->create(request());
+            case 'edit':
+                return $this->edit($id);
+            case 'update':
+                return $this->update(request(), $id);
+            case 'delete':
+                return $this->delete($id);
+            case 'visibilidad':
+                return $this->visibilidad(request(), $id);
+            default:
+                return response()->json(['error' => 'Acción no válida'], 400);
+        }
     }
-  }
 
-  /**
-   * Display a listing of the resource.
-   */
+    /**
+     * Muestra una lista de las secciones visibles para el usuario.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable Retorna la vista con las secciones visibles.
+     */
+    public function index()
+    {
+        // Obtener secciones visibles y secciones asociadas al usuario autenticado
+        $seccionesVisibles = Seccione::where('visibilidad', true)->with('tema')->get();
+        $usuario = User::findOrFail(auth()->user()->id);
+        $seccionesUsuario = $usuario->secciones()->pluck('id')->toArray();
 
-  public function visibilidad(Request $request, $id)
-  {
-    $seccion = Seccione::findOrFail($id);
+        // Filtrar las secciones visibles según las secciones asociadas al usuario
+        $secciones = $seccionesVisibles->filter(function ($seccion) use ($seccionesUsuario) {
+            return in_array($seccion->id, $seccionesUsuario);
+        });
 
-    // Obtener el valor del checkbox (puede ser "on" o null)
-    $visibilidad = $request->input('visibilidad');
+        // Retornar la vista con las secciones
+        return view('logged/sections', compact('secciones'));
+    }
 
-    // Convertir el valor a un booleano
-    $seccion->visibilidad = $visibilidad === "on";
+    /**
+     * Muestra los temas asociados a una sección.
+     *
+     * @param int $id El ID de la sección.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable Retorna la vista con los temas y contenido asociado.
+     */
+    public function tema($id)
+    {
+        // Obtener el tema y el contenido asociado a la sección
+        $temas = Tema::findOrFail($id);
+        $contenido = TemaTeoriaPractica::with('teoria', 'imagen', 'practica')
+            ->where('id_tema_fk', $id)
+            ->get();
 
-    $seccion->save();
+        // Retornar la vista con los temas y contenido
+        return view('logged/temas', compact('contenido'));
+    }
 
-    return redirect()->back();
-  }
+    /**
+     * Cambia la visibilidad de una sección.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP.
+     * @param int $id El ID de la sección.
+     *
+     * @return \Illuminate\Http\RedirectResponse Redirecciona de nuevo a la página anterior.
+     */
+    public function visibilidad(Request $request, $id)
+    {
+        // Encontrar la sección por su ID
+        $seccion = Seccione::findOrFail($id);
 
-  public function index()
-  {
-    $seccionesVisibles = Seccione::where('visibilidad', true)->with('tema')->get();
+        // Obtener el valor del checkbox (puede ser "on" o null)
+        $visibilidad = $request->input('visibilidad');
 
-    $usuario = User::findOrFail(auth()->user()->id);
-    $seccionesUsuario = $usuario->secciones()->pluck('id')->toArray();
+        // Convertir el valor a un booleano y actualizar la visibilidad de la sección
+        $seccion->visibilidad = $visibilidad === "on";
+        $seccion->save();
 
+        // Redirigir de nuevo a la página anterior
+        return redirect()->back();
+    }
 
-    $secciones = $seccionesVisibles->filter(function ($seccion) use ($seccionesUsuario) {
-      return in_array($seccion->id, $seccionesUsuario);
-    });
+    /**
+     * Muestra el formulario para crear una nueva sección.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable Retorna la vista del formulario de creación.
+     */
+    public function create(Request $request)
+    {
+        // Validar la solicitud
+        $request->validate(
+            [
+                'titulo_seccion' => 'required|max:250',
+            ],
+            [
+                'titulo_seccion.required' => 'El Título es obligatorio.',
+                'titulo_seccion.max' => 'El título no debe superar los 250 caracteres.',
+            ]
+        );
 
-    return view('logged/sections', compact('secciones'));
-  }
+        // Crear un nuevo registro de sección
+        $data = [
+            'titulo_seccion' => $request->input('titulo_seccion'),
+        ];
+        Seccione::create($data);
 
-  public function tema($id)
-  {
-    $temas = Tema::findOrFail($id);
-    // $contenido = TemaTeoriaPractica::where('id_tema_fk', $id)->get();
-    $contenido = TemaTeoriaPractica::with('teoria', 'imagen', 'practica')
-      ->where('id_tema_fk', $id)
-      ->get();
+        // Redirigir a la página de secciones con un mensaje de éxito
+        return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Sección agregada exitosamente');
+    }
 
-    // $contenido = $temas::with('TemaTeoriaPractica')->get(); 
-    // dd($contenido);
-    return view('logged/temas', compact('contenido'));
-  }
+    /**
+     * Muestra el formulario para editar una sección.
+     *
+     * @param int $id El ID de la sección a editar.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable Retorna la vista del formulario de edición.
+     */
+    public function edit($id)
+    {
+        // Obtener todas las secciones y la sección específica por su ID
+        $secciones = Seccione::all();
+        $seccionId = Seccione::findOrFail($id);
 
-  /**
-   * Store a newly created resource in storage.
-   */
-  public function create(Request $request)
-  {
-    $request->validate(
-      [
-        'titulo_seccion' => 'required|max:250',
-      ],
-      [
-        'titulo_seccion.required' => 'El Título es obligatorio.',
-        'titulo_seccion.max' => 'El título no debe superar los 250 caracteres.',
-      ]
-    );
+        // Retornar la vista del formulario de edición
+        return view('dashboard/secciones/edit', compact('seccionId', 'secciones'));
+    }
 
-    $data = [
-      'titulo_seccion' => $request->input('titulo_seccion'),
-    ];
+    /**
+     * Actualiza los datos de una sección en la base de datos.
+     *
+     * @param \Illuminate\Http\Request $data La solicitud HTTP con los datos del formulario.
+     * @param int $id El ID de la sección a actualizar.
+     *
+     * @return \Illuminate\Http\RedirectResponse Redirecciona a la página de secciones con un mensaje de éxito.
+     */
+    public function update(Request $data, $id)
+    {
+        // Definir reglas de validación
+        $rules = [
+            'titulo_seccion' => 'required|max:250',
+        ];
 
-    Seccione::create($data);
+        // Mensajes de error personalizados
+        $messages = [
+            'name.required' => 'El Titulo es obligatorio.',
+            'name.max' => 'El nombre no debe superar los 250 caracteres.',
+        ];
 
-    return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Sección agregada exitosamente');
-  }
+        // Validar los datos con las reglas y mensajes definidos
+        $this->validate($data, $rules, $messages);
 
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit($id)
-  {
-    $secciones = Seccione::all();
-    $seccionId = Seccione::findOrFail($id);
+        // Encontrar la sección por su ID
+        $seccion = Seccione::findOrFail($id);
 
-    return view('dashboard/secciones/edit', compact('seccionId', 'secciones'));
-  }
+        // Actualizar los campos de la sección utilizando los valores del formulario
+        $seccion->update([
+            'titulo_seccion' => $data->input('titulo_seccion'),
+        ]);
 
-  /**
-   * Update the specified resource in storage.
-   */
-  public function update(Request $data, $id)
-  {
-    $rules = [
-      'titulo_seccion' => 'required|max:250',
-    ];
+        // Redirigir a la página de secciones con un mensaje de éxito
+        return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Seccion actualizada exitosamente');
+    }
 
-    // Mensajes de error personalizados
-    $messages = [
-      'name.required' => 'El Titulo es obligatorio.',
-      'name.max' => 'El nombre no debe superar los 250 caracteres.',
-    ];
+    /**
+     * Elimina una sección de la base de datos.
+     *
+     * @param int $id El ID de la sección a eliminar.
+     *
+     * @return \Illuminate\Http\RedirectResponse Redirecciona a la página de secciones con un mensaje de éxito.
+     */
+    public function delete($id)
+    {
+        // Encontrar la sección por su ID
+        $seccion = Seccione::findOrFail($id);
 
-    // Valida los datos de entrada con las reglas definidas
-    $this->validate($data, $rules, $messages);
+        // Eliminar la sección
+        $seccion->delete();
 
-    // Buscar la seccion por su ID
-    $seccion = Seccione::findOrFail($id);
-
-    // Actualizar los campos de la campo utilizando los valores del formulario
-    $seccion->update([
-      'titulo_seccion' => $data->input('titulo_seccion'),
-    ]);
-
-    return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Seccion actualizada exitosamente');
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function delete($id)
-  {
-    // Buscar la campo por su ID
-    $seccion = Seccione::findOrFail($id);
-
-    // Eliminar la campo
-    $seccion->delete();
-
-    return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Seccion eliminada exitosamente');
-  }
+        // Redirigir a la página de secciones con un mensaje de éxito
+        return redirect()->route('dashboardAction', ['action' => 'secciones'])->with('success', 'Seccion eliminada exitosamente');
+    }
 }

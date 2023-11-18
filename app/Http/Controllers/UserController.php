@@ -14,13 +14,26 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    /**
+     * Crea una nueva instancia del controlador.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Maneja las llamadas de método dinámicas al controlador.
+     *
+     * @param  string  $action
+     * @param  mixed  $id
+     * @return \Illuminate\Http\Response
+     */
     public function __invoke($action, $id = null)
     {
+        // Realiza acciones dinámicas basadas en la acción proporcionada
         switch ($action) {
             case 'create':
                 return $this->create(request()->all());
@@ -34,10 +47,16 @@ class UserController extends Controller
                 return $this->profile(request());
             default:
                 return response()->json(['error' => 'Acción no válida'], 400);
-            }
+        }
     }
 
-
+    /**
+     * Obtiene un validador para una solicitud de registro entrante.
+     *
+     * @param  array  $data
+     * @param  User|null  $user
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     protected function validator(array $data, $user = null)
     {
         $messages = [
@@ -71,12 +90,21 @@ class UserController extends Controller
         ], $messages);
     }
     
+    /**
+     * Crea una nueva instancia de usuario después de una registración válida.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Http\Response
+     */
     protected function create(array $data)
     {
+        // Valida la entrada del usuario
         $this->validator($data)->validate();
 
+        // Establece la contraseña como el número de documento
         $data['password'] = $data['num_doc'];
 
+        // Crea un nuevo usuario
         $user = User::create([
             'id_rol_fk' => $data['id_rol_fk'],
             'nombre' => $data['nombre'],
@@ -91,33 +119,56 @@ class UserController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
+        // Sincroniza las secciones del usuario
         $user->secciones()->sync($data['vistas']);
         
         return redirect()->route('view', ['view' => 'dashboard.users.view'])->with('success', 'Usuario creado exitosamente.');
     }
 
+    /**
+     * Muestra el formulario para editar el recurso especificado.
+     *
+     * @param  mixed  $id
+     * @return \Illuminate\Http\Response
+     */
     protected function edit($id)
     {
+        // Encuentra al usuario por ID
         $userId = User::findOrFail($id);
+
+        // Obtiene las secciones asociadas con el usuario
         $usuarioSecciones = $userId->secciones()->pluck('id')->toArray();
 
+        // Datos adicionales para la vista
         $data = User::paginate(100);
         $fechaNac = Carbon::parse($userId->fecha_nac)->format('Y-m-d');
         $rol = Role::all();
         $seccion = Seccione::all();
 
+        // Arreglos para las listas desplegables
         $tiposDocumento = ['Cédula de Ciudadanía','Tarjeta de Identidad','Cédula de Extranjería','Número ciego SENA','Pasaporte','Documento Nacional de Identificación Pasaporte','Número de Identificación Tributaria','PEP - RAMV','PEP','Permiso por Protección Temporal',];
         $departamentos = ['Amazonas','Antioquia','Arauca','Atlántico','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada',];
 
+        // Retorna la vista de edición con los datos necesarios
         return view('dashboard\users\edit', compact('userId', 'rol', 'fechaNac', 'data', 'tiposDocumento', 'departamentos', 'seccion', 'usuarioSecciones'));
     }
     
+    /**
+     * Actualiza el recurso especificado en el almacenamiento.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $id
+     * @return \Illuminate\Http\Response
+     */
     protected function update(Request $request, $id)
     {
+        // Encuentra al usuario por ID
         $user = User::findOrFail($id);
 
+        // Valida la entrada del usuario
         $this->validator($request->all(), $user)->validate();
 
+        // Actualiza los datos del usuario
         $user->id_rol_fk = $request->input('id_rol_fk');
         $user->nombre = $request->input('nombre');
         $user->telefono = $request->input('telefono');
@@ -131,26 +182,44 @@ class UserController extends Controller
         
         $user->save();
 
+        // Sincroniza las secciones del usuario
         $user->secciones()->sync($request->input('vistas'));
 
         return redirect()->route('view', ['view' => 'dashboard.users.view'])->with('success', 'Usuario actualizado exitosamente.');
     }
 
+    /**
+     * Elimina el recurso especificado del almacenamiento.
+     *
+     * @param  mixed  $id
+     * @return \Illuminate\Http\Response
+     */
     protected function delete($id)
     {
+        // Encuentra al usuario por ID
         $user = User::find($id);
 
+        // Elimina al usuario
         $user->delete();
 
         return redirect()->route('view', ['view' => 'dashboard.users.view'])->with('success', 'Usuario eliminado exitosamente.');
     }
 
+    /**
+     * Actualiza la información de perfil del usuario autenticado.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     protected function profile(Request $request)
     {
+        // Obtiene al usuario autenticado
         $user = Auth::user();
 
+        // Valida la entrada del usuario
         $this->validator($request->all(), $user)->validate();
 
+        // Actualiza los datos del perfil del usuario
         $user->nombre = $request->input('nombre');
         $user->telefono = $request->input('telefono');
         $user->num_doc = $request->input('num_doc');
