@@ -99,6 +99,8 @@ class UserController extends Controller
     protected function edit($id)
     {
         $userId = User::findOrFail($id);
+        $usuarioSecciones = $userId->secciones()->pluck('id')->toArray();
+
         $data = User::paginate(100);
         $fechaNac = Carbon::parse($userId->fecha_nac)->format('Y-m-d');
         $rol = Role::all();
@@ -107,7 +109,7 @@ class UserController extends Controller
         $tiposDocumento = ['Cédula de Ciudadanía','Tarjeta de Identidad','Cédula de Extranjería','Número ciego SENA','Pasaporte','Documento Nacional de Identificación Pasaporte','Número de Identificación Tributaria','PEP - RAMV','PEP','Permiso por Protección Temporal',];
         $departamentos = ['Amazonas','Antioquia','Arauca','Atlántico','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada',];
 
-        return view('dashboard\users\edit', compact('userId', 'rol', 'fechaNac', 'data', 'tiposDocumento', 'departamentos', 'seccion'));
+        return view('dashboard\users\edit', compact('userId', 'rol', 'fechaNac', 'data', 'tiposDocumento', 'departamentos', 'seccion', 'usuarioSecciones'));
     }
     
     protected function update(Request $request, $id)
@@ -128,6 +130,8 @@ class UserController extends Controller
         $user->centro_form = $request->input('centro_form');
         
         $user->save();
+
+        $user->secciones()->sync($request->input('vistas'));
 
         return redirect()->route('view', ['view' => 'dashboard.users.view'])->with('success', 'Usuario actualizado exitosamente.');
     }

@@ -49,7 +49,16 @@ class SeccionesController extends Controller
 
   public function index()
   {
-    $secciones = Seccione::where('visibilidad', true)->with('tema')->get();
+    $seccionesVisibles = Seccione::where('visibilidad', true)->with('tema')->get();
+
+    $usuario = User::findOrFail(auth()->user()->id);
+    $seccionesUsuario = $usuario->secciones()->pluck('id')->toArray();
+
+
+    $secciones = $seccionesVisibles->filter(function ($seccion) use ($seccionesUsuario) {
+      return in_array($seccion->id, $seccionesUsuario);
+    });
+
     return view('logged/sections', compact('secciones'));
   }
 
