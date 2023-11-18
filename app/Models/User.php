@@ -24,7 +24,7 @@ class User extends Authenticatable
         'telefono',	
         'num_doc',	
         'tipo_doc',	
-        'correo_inst',	
+        'email',	
         'correo_alt',	
         'regional',
         'fecha_nac',	

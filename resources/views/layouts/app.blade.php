@@ -26,10 +26,12 @@
   <div class="nav">
     <input type="checkbox" id="nav-check">
     <div class="nav-header">
+      @if (isset(Auth::user()->nombre))
       <div class="nav-title">
         <i class='bx bxs-user'></i>
         {{ 'ㅤ' . Auth::user()->nombre }}
       </div>
+      @endif
     </div>
     <div class="nav-btn">
       <label for="nav-check">

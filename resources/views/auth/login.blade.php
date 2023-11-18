@@ -12,14 +12,14 @@
         <form class="form" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form__item">
-                <label class="item__label left-label" for="correo_inst">{{ __('Correo Institucional') }}</label>
+                <label class="item__label left-label" for="email">{{ __('Correo Institucional') }}</label>
                 {{-- <br> --}}
-                {{-- <input class="item__input" type="email" name="correo_inst" placeholder="Correo" required autofocus> --}}
-                <input class="item__input" type="email" name="correo_inst" id="correo_inst" placeholder="Correo" required autofocus>
-                @error('correo_inst')
-                <span class="alert">
+                {{-- <input class="item__input" type="email" name="email" placeholder="Correo" required autofocus> --}}
+                <input class="item__input" type="email" name="email" id="email" placeholder="Correo" required autofocus>
+                @error('email')
+                <div class="alert">
                     <strong>{{ $message }}</strong>
-                </span>
+                </div>
                 @enderror
             </div>
             <div class="form__item">
@@ -29,11 +29,11 @@
 
             </div>
 
-            <!-- @if (Route::has('password.request'))
+            @if (Route::has('password.request'))
                 <a class="btn btn-link" href="{{ route('password.request') }}">
                     {{ __('¿Olvidaste tu contraseña?') }}
                 </a>
-            @endif -->
+            @endif
 
             <div class="form__button">
                 <a href="{{ url('/') }}">

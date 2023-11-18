@@ -180,6 +180,47 @@
 
 .alert {
     color: var(--rojo);
+    margin: 20px 0 20px 0;
+}
+
+/* 
+    VISTA RECUPERAR CONTRASEÑA 
+*/
+
+.contraseña {
+    background-color: var(--colorTerceario);
+}
+
+.contraseña__titulo {
+    text-align: center;
+    color: var(--colorSecundario);
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.container__contraseña {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 40px;
+}
+
+.contraseña__div {
+    background-color: var(--blanco);
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding: 40px;
+    border-radius: 40px;
+}
+
+.success__alert {
+    color: var(--colorPrincipal);
+    font-weight: bold;
+    margin: 20px 0 20px 0;
 }
 
 /* 
@@ -305,6 +346,14 @@
 
     .item__input {
         padding: 12px;
+    }
+
+    /* 
+        VISTA RECUPERAR CONTRASEÑA  
+    */
+
+    .contraseña__div {
+        width: 50%;
     }
 
     /* 
